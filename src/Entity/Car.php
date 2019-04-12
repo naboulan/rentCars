@@ -2,6 +2,8 @@
 
 namespace App\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -61,12 +63,23 @@ class Car
      */
     private $boitAVitesse;
 
+    /**
+     * @ORM\ManyToOne(targetEntity="App\Entity\Car", inversedBy="commentaire")
+     */
+    private $car;
 
     /**
-     * @ORM\ManyToOne(targetEntity="App\Entity\User", inversedBy="cars")
-     * @ORM\JoinColumn(name="user_id", referencedColumnName="id")
+     * @ORM\OneToMany(targetEntity="App\Entity\Car", mappedBy="car")
      */
-    private $user;
+    private $commentaire;
+
+    public function __construct()
+    {
+        $this->commentaire = new ArrayCollection();
+    }
+
+
+    
 
     public function getId(): ?int
     {
@@ -177,6 +190,49 @@ class Car
     public function setBoitAVitesse(bool $boitAVitesse): self
     {
         $this->boitAVitesse = $boitAVitesse;
+
+        return $this;
+    }
+
+    public function getCar(): ?self
+    {
+        return $this->car;
+    }
+
+    public function setCar(?self $car): self
+    {
+        $this->car = $car;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|self[]
+     */
+    public function getCommentaire(): Collection
+    {
+        return $this->commentaire;
+    }
+
+    public function addCommentaire(self $commentaire): self
+    {
+        if (!$this->commentaire->contains($commentaire)) {
+            $this->commentaire[] = $commentaire;
+            $commentaire->setCar($this);
+        }
+
+        return $this;
+    }
+
+    public function removeCommentaire(self $commentaire): self
+    {
+        if ($this->commentaire->contains($commentaire)) {
+            $this->commentaire->removeElement($commentaire);
+            // set the owning side to null (unless already changed)
+            if ($commentaire->getCar() === $this) {
+                $commentaire->setCar(null);
+            }
+        }
 
         return $this;
     }
