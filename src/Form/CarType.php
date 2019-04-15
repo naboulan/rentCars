@@ -21,7 +21,7 @@ class CarType extends AbstractType
             ->add('price')
             ->add('caution')
             ->add('boitAVitesse')
-            ->add('car')
+            
         ;
     }
 

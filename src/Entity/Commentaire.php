@@ -33,6 +33,12 @@ class Commentaire
      */
     private $commentaires;
 
+    
+    /**
+     * @ORM\ManyToOne(targetEntity="App\Entity\Car", inversedBy="commentaire")
+     */
+    private $car;
+
     public function __construct()
     {
         $this->commentaires = new ArrayCollection();

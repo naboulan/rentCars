@@ -63,10 +63,6 @@ class Car
      */
     private $boitAVitesse;
 
-    /**
-     * @ORM\ManyToOne(targetEntity="App\Entity\Car", inversedBy="commentaire")
-     */
-    private $car;
 
     /**
      * @ORM\OneToMany(targetEntity="App\Entity\Car", mappedBy="car")
