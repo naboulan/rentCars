@@ -68,6 +68,16 @@ class Car
      * @ORM\OneToMany(targetEntity="App\Entity\Car", mappedBy="car")
      */
     private $commentaire;
+   /**
+     * @ORM\OneToOne(targetEntity="App\Entity\Car", cascade={"persist", "remove"})
+     * @ORM\JoinColumn(nullable=false)
+     */
+    private $location;
+
+    /**
+     * @ORM\ManyToOne(targetEntity="App\Entity\User", inversedBy="rcu")
+     */
+    private $user;
 
     public function __construct()
     {
@@ -229,6 +239,30 @@ class Car
                 $commentaire->setCar(null);
             }
         }
+
+        return $this;
+    }
+
+    public function getLocation(): ?location
+    {
+        return $this->location;
+    }
+
+    public function setLocation(?location $location): self
+    {
+        $this->location = $location;
+
+        return $this;
+    }
+
+    public function getUser(): ?User
+    {
+        return $this->user;
+    }
+
+    public function setUser(?User $user): self
+    {
+        $this->user = $user;
 
         return $this;
     }

@@ -16,7 +16,7 @@ class User
      * @ORM\GeneratedValue()
      * @ORM\Column(type="integer")
      */
-    private $id;
+    public $id;
 
     /**
      * @ORM\OneToMany(targetEntity="App\Entity\Car", mappedBy="user")
@@ -27,7 +27,8 @@ class User
         $this->cars = new ArrayCollection();
         $this->locations = new ArrayCollection();
         $this->Messagerie = new ArrayCollection();
-
+        $this->Car = new ArrayCollection();
+      
     }
     /**
      * @ORM\Column(type="string", length=255)
@@ -46,7 +47,7 @@ class User
      */
     private $prenom;
      /**
-     * @ORM\Column(type="date")
+     *@ORM\Column(type="string", length=255)
      */
     private $datedenaissance;
      /**
@@ -75,19 +76,26 @@ class User
     private $anneepermis;
 
     /**
-     * @ORM\OneToMany(targetEntity="App\Entity\Location", mappedBy="User")
+     * @ORM\OneToMany(targetEntity="App\Entity\location", mappedBy="User")
      */
     private $locations;
 
+    
+
     /**
-     * @ORM\ManyToOne(targetEntity="App\Entity\User", inversedBy="Messagerie")
+     * @ORM\OneToMany(targetEntity="App\Entity\User", mappedBy="user")
+     */
+    private $Messagerie;
+
+    /**
+     * @ORM\ManyToOne(targetEntity="App\Entity\User", inversedBy="Car")
      */
     private $user;
 
     /**
      * @ORM\OneToMany(targetEntity="App\Entity\User", mappedBy="user")
      */
-    private $Messagerie;
+    private $Car;
 
 
     public function getemail(): ?string
@@ -95,7 +103,7 @@ class User
         return $this->email;
     }
 
-    public function setemail(int $email): self
+    public function setemail(string $email): self
     {
         $this->email = $email;
 
@@ -106,7 +114,7 @@ class User
         return $this->mdp;
     }
 
-    public function setmdp(int $mdp): self
+    public function setmdp(string $mdp): self
     {
         $this->mdp = $mdp;
 
@@ -118,7 +126,7 @@ class User
         return $this->nom;
     }
 
-    public function setnom(int $nom): self
+    public function setnom(string $nom): self
     {
         $this->nom = $nom;
 
@@ -130,19 +138,19 @@ class User
         return $this->prenom;
     }
 
-    public function setprenom(int $prenom): self
+    public function setprenom(string $prenom): self
     {
         $this->prenom = $prenom;
 
         return $this;
     }
 
-    public function getdatedenaissance(): ?date
+    public function getdatedenaissance(): ?string
     {
         return $this->datedenaissance;
     }
 
-    public function setdatedenaissance(int $datedenaissance): self
+    public function setdatedenaissance(string $datedenaissance): self
     {
         $this->datedenaissance = $datedenaissance;
 
@@ -154,7 +162,7 @@ class User
         return $this->adresse;
     }
 
-    public function setadresse(int $adresse): self
+    public function setadresse(string $adresse): self
     {
         $this->adresse = $adresse;
 
@@ -165,7 +173,7 @@ class User
         return $this->ville;
     }
 
-    public function setville(int $ville): self
+    public function setville(string $ville): self
     {
         $this->ville = $ville;
 
@@ -188,7 +196,7 @@ class User
         return $this->numtel;
     }
 
-    public function setnumtel(int $numtel): self
+    public function setnumtel(string $numtel): self
     {
         $this->numtel = $numtel;
 
@@ -201,7 +209,7 @@ class User
         return $this->numpermis;
     }
 
-    public function setnumpermis(int $numpermis): self
+    public function setnumpermis(string $numpermis): self
     {
         $this->numpermis = $numpermis;
 
@@ -288,6 +296,37 @@ class User
             // set the owning side to null (unless already changed)
             if ($messagerie->getUser() === $this) {
                 $messagerie->setUser(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|self[]
+     */
+    public function getCar(): Collection
+    {
+        return $this->Car;
+    }
+
+    public function addCar(self $car): self
+    {
+        if (!$this->Car->contains($car)) {
+            $this->Car[] = $car;
+            $car->setUser($this);
+        }
+
+        return $this;
+    }
+
+    public function removeCar(self $car): self
+    {
+        if ($this->Car->contains($car)) {
+            $this->Car->removeElement($car);
+            // set the owning side to null (unless already changed)
+            if ($car->getUser() === $this) {
+                $car->setUser(null);
             }
         }
 

@@ -7,9 +7,11 @@
     <body>
         <div id="sidebar">
             {% block sidebar %}
+
                 <ul>
                     <li><a href="/">Home</a></li>
                     <li><a href="{{ path('car_index') }}">Car</a></li>
+                    <li><a href="{{ path('user_index') }}">user</a></li>
                 </ul>
             {% endblock %}
         </div>

@@ -60,6 +60,11 @@ class Etatdl
      * @ORM\Column(type="bigint")
      */
     private $km;
+       /**
+     * @ORM\OneToOne(targetEntity="App\Entity\Etatdl", cascade={"persist", "remove"})
+     * @ORM\JoinColumn(nullable=false)
+     */
+    private $location;
 
     
 

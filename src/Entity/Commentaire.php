@@ -28,16 +28,17 @@ class Commentaire
      */
     private $note;
 
-    /**
-     * @ORM\OneToMany(targetEntity="App\Entity\Commentaire", mappedBy="User")
-     */
-    private $commentaires;
-
+   
     
     /**
      * @ORM\ManyToOne(targetEntity="App\Entity\Car", inversedBy="commentaire")
      */
     private $car;
+
+    /**
+     * @ORM\ManyToOne(targetEntity="App\Entity\User", inversedBy="commentaires")
+     */
+    private $User;
 
     public function __construct()
     {
@@ -100,6 +101,18 @@ class Commentaire
                 $commentaire->setUser(null);
             }
         }
+
+        return $this;
+    }
+
+    public function getUser(): ?User
+    {
+        return $this->User;
+    }
+
+    public function setUser(?User $User): self
+    {
+        $this->User = $User;
 
         return $this;
     }

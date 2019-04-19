@@ -16,16 +16,16 @@ class UserRepository extends ServiceEntityRepository
 {
     public function __construct(RegistryInterface $registry)
     {
-        parent::__construct($registry, Car::class);
+        parent::__construct($registry, User::class);
     }
 
     // /**
-    //  * @return Car[] Returns an array of Car objects
+    //  * @return User[] Returns an array of User objects
     //  */
     /*
     public function findByExampleField($value)
     {
-        return $this->createQueryBuilder('c')
+        return $this->createQueryBuilder('u')
             ->andWhere('c.exampleField = :val')
             ->setParameter('val', $value)
             ->orderBy('c.id', 'ASC')
@@ -37,9 +37,9 @@ class UserRepository extends ServiceEntityRepository
     */
 
     /*
-    public function findOneBySomeField($value): ?Car
+    public function findOneBySomeField($value): ?User
     {
-        return $this->createQueryBuilder('c')
+        return $this->createQueryBuilder('u')
             ->andWhere('c.exampleField = :val')
             ->setParameter('val', $value)
             ->getQuery()

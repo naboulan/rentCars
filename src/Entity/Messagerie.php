@@ -15,6 +15,10 @@ class Messagerie
      * @ORM\Column(type="integer")
      */
     private $id;
+      /**
+     * @ORM\ManyToOne(targetEntity="App\Entity\User", inversedBy="Messagerie")
+     */
+    private $user;
 
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
