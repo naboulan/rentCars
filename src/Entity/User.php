@@ -47,7 +47,7 @@ class User
      */
     private $prenom;
      /**
-     *@ORM\Column(type="string", length=255)
+     *@ORM\Column(type="date")
      */
     private $datedenaissance;
      /**
@@ -86,11 +86,6 @@ class User
      * @ORM\OneToMany(targetEntity="App\Entity\User", mappedBy="user")
      */
     private $Messagerie;
-
-    /**
-     * @ORM\ManyToOne(targetEntity="App\Entity\User", inversedBy="Car")
-     */
-    private $user;
 
     /**
      * @ORM\OneToMany(targetEntity="App\Entity\User", mappedBy="user")
@@ -145,12 +140,12 @@ class User
         return $this;
     }
 
-    public function getdatedenaissance(): ?string
+    public function getdatedenaissance()
     {
         return $this->datedenaissance;
     }
 
-    public function setdatedenaissance(string $datedenaissance): self
+    public function setdatedenaissance(date $datedenaissance): self
     {
         $this->datedenaissance = $datedenaissance;
 

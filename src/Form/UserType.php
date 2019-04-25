@@ -23,7 +23,7 @@ class UserType extends AbstractType
             ->add('numtel')
             ->add('numpermis')
             ->add('anneepermis')
-            ->add('user')
+           // ->add('user')
         ;
     }
 

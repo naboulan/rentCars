@@ -3,6 +3,9 @@
     <head>
         <meta charset="UTF-8">
         <title>{% block title %}Test Application{% endblock %}</title>
+        {% block style %}
+        <link href="{{ asset('css/style.css') }}" rel="stylesheet" /> 
+        {% endblock %} 
     </head>
     <body>
         <div id="sidebar">
