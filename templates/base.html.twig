@@ -5,22 +5,77 @@
         <title>{% block title %}Test Application{% endblock %}</title>
         {% block style %}
         <link href="{{ asset('css/style.css') }}" rel="stylesheet" /> 
+        <link href="{{ asset('css/pageacc.css') }}" rel="stylesheet" /> 
+        <link rel="stylesheet" href="{{ asset('bootstrap/css/bootstrap.min.css') }}" />
+        <script src="{{ asset('vendor/jquery/jquery.min.js') }}"></script>
+        <script src="{{ asset('vendor/bootstrap/js/bootstrap.bundle.min.js') }}"></script>
+        <script src="{{ asset('vendor/jquery-easing/jquery.easing.min.js') }}"></script>
+          <script src="js/stylish-portfolio.min.js"></script>
         {% endblock %} 
     </head>
     <body>
         <div id="sidebar">
             {% block sidebar %}
 
-                <ul>
-                    <li><a href="/">Home</a></li>
-                    <li><a href="{{ path('car_index') }}">Car</a></li>
-                    <li><a href="{{ path('user_index') }}">user</a></li>
-                </ul>
-            {% endblock %}
-        </div>
+           <nav>
+ <section class="nav-container">
+ <aside class="logo"> <h1> RENT&GO </h1></aside>
 
-        <div id="content">
+ <aside class="menu">
+  <div class="menu-content" > 
+  <a href="#" id="login"> Se connecter </a> | <a href="#"> S'inscrire </a>
+  </div>
+ <div class="arrow-up" > </div>
+ </aside>
+ <div class="login-form">
+
+ <form>
+ <div class="card-body">
+            <h5 class="card-title text-center">Sign In</h5>
+            <form class="form-signin">
+              <div class="form-label-group">
+			  
+                <input type="email" id="inputEmail" class="form-control" placeholder="Email address" required autofocus>
+                <label for="inputEmail">Email address</label>
+              </div>
+
+              <div class="form-label-group">
+                <input type="password" id="inputPassword" class="form-control" placeholder="Password" required>
+                <label for="inputPassword">Password</label>
+              </div>
+
+              <div class="custom-control custom-checkbox mb-3">
+                <input type="checkbox" class="custom-control-input" id="customCheck1">
+                <label class="custom-control-label" for="customCheck1">Remember password</label>
+              </div>
+              <button class="btn btn-lg btn-primary btn-block text-uppercase" type="submit">Sign in</button>
+             
+              
+          </div>
+        </div>
+      </div>
+ </form>
+ </div>
+ </section>
+ </nav>
+  <script type="text/javascript">
+  $(document).ready(function(){
+  var arrow=$(".arrow-up");
+  var form=$(".login-form");
+  var status=false;
+  $("#login").click(function(event){
+  event.preventDefault();
+  if(status == false){arrow.fadeIn();
+  form.fadeIn();
+  status=true;}else{arrow.fadeOut();
+  form.fadeOut();
+  status=false;
+  }
+ })
+  })
+  </script>
             {% block body %}ggggg{% endblock %}
+            {% endblock %}
         </div>
     </body>
 </html>
