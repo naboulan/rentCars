@@ -1,3 +1,51 @@
-body{
-    background-color: brown;
+.form-control-borderless {
+    border: none;
 }
+
+.form-control-borderless:hover, .form-control-borderless:active, .form-control-borderless:focus {
+    border: none;
+    outline: none;
+    box-shadow: none;
+
+}
+.container{
+    margin-top: 100;
+}
+.calendrier{
+    display:none;
+    margin-right:15px;
+    width:300px; float:left; 
+    
+}
+[type="date"] {
+background:#fff url(https://cdn1.iconfinder.com/data/icons/cc_mono_icon_set/blacks/16x16/calendar_2.png)  97% 50% no-repeat ;
+}
+[type="date"]::-webkit-inner-spin-button {
+display: none;
+}
+[type="date"]::-webkit-calendar-picker-indicator {
+opacity: 0;
+}
+.dated{
+margin:160px;
+margin-left:300%;
+background:#FFFFFF;
+height:100px;
+
+border-radius:15px;
+padding:10px;
+position: absolute;
+}
+.datef{
+    
+margin:160px;
+margin-left:59%;
+background:#FFFFFF;
+height:50px;
+border-radius:15px;
+padding:10px;
+position: absolute;
+
+}
+#debut{border:none;}
+#fin{border:none;}
