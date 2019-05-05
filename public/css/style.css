@@ -9,7 +9,10 @@
 
 }
 .container{
-    margin-top: 100;
+    margin-top: 500;
+    height: 500px;
+    width: 500px;
+    background-color: powderblue;
 }
 .calendrier{
     display:none;
@@ -49,3 +52,4 @@ position: absolute;
 }
 #debut{border:none;}
 #fin{border:none;}
+

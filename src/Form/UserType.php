@@ -6,24 +6,41 @@ use App\Entity\User;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
-
+use Symfony\Component\Form\Extension\Core\Type\EmailType;
+use Symfony\Component\Form\Extension\Core\Type\PasswordType;
+use Symfony\Component\Form\Extension\Core\Type\TextType;
+use Symfony\Component\Form\Extension\Core\Type\BirthdayType;
+use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
+use Symfony\Component\Form\Extension\Core\Type\TextareaType;
+use Symfony\Component\Form\Extension\Core\Type\DateType;
+use Symfony\Component\Form\Extension\Core\Type\NumberType;
 class UserType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('email')
-            ->add('mdp')
-            ->add('nom')
-            ->add('prenom')
-            ->add('datedenaissance')
-            ->add('adresse')
-            ->add('ville')
+            ->add('email' , EmailType::class,[ 'attr'=>['placeholder'=>"votre email"] ])
+            ->add('mdp', PasswordType::class,[ 'attr'=>['placeholder'=>"votre password"] ])
+            ->add('nom',TextType::class,[ 'attr'=>['placeholder'=>"votre nom"] ])
+            ->add('prenom',TextType::class,[ 'attr'=>['placeholder'=>"votre prenom"] ])
+            ->add('datedenaissance', BirthdayType::class, [
+                'placeholder' =>  [
+                    'year' => 'Year', 'month' => 'Month', 'day' => 'Day',
+                ]
+            ])
+            ->add('adresse',TextareaType::class, [
+                'attr' => ['class' => 'tinymce'],
+            ])
+            ->add('ville', ChoiceType::class, [
+                'placeholder' => 'Choose an option',
+            ])
             ->add('codepostal')
-            ->add('numtel')
-            ->add('numpermis')
-            ->add('anneepermis')
-           // ->add('user')
+            ->add('numtel',NumberType::class,[ 'attr'=>['placeholder'=>"votre numero"] ])
+            ->add('numpermis',NumberType::class,[ 'attr'=>['placeholder'=>"votre numero permis"] ])
+            ->add('anneepermis', DateType::class, [
+                'widget' => 'choice',
+            ])
+           
         ;
     }
 
