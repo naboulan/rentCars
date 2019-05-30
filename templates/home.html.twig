@@ -32,7 +32,7 @@
                                     </div>
                                     <!--end of col-->
                                     <div class="col-auto">
-                                        <button class="btn btn-lg btn-success" type="submit">Search</button>
+                                        <a href="{{ path('user_index') }}"  class="btn btn-lg btn-success" role="button">Search</a>
                                     </div>
                                     <!--end of col-->
                                 </div>
@@ -51,14 +51,7 @@
 <input type="date" name="dateofbirth" id="fin">
 </div>
 </div>
-<button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-        Dropdown button
-      </button>
-      <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-        <a class="dropdown-item" href="#">Action</a>
-        <a class="dropdown-item" href="#">Another action</a>
-        <a class="dropdown-item" href="#">Something else here</a>
-      </div>
+
     
  {% endblock %}
   

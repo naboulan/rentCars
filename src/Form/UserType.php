@@ -25,15 +25,13 @@ class UserType extends AbstractType
             ->add('prenom',TextType::class,[ 'attr'=>['placeholder'=>"votre prenom"] ])
             ->add('datedenaissance', BirthdayType::class, [
                 'placeholder' =>  [
-                    'year' => 'Year', 'month' => 'Month', 'day' => 'Day',
+                     'month' => 'Month', 'day' => 'Day','year' => 'Year',
                 ]
             ])
             ->add('adresse',TextareaType::class, [
                 'attr' => ['class' => 'tinymce'],
             ])
-            ->add('ville', ChoiceType::class, [
-                'placeholder' => 'Choose an option',
-            ])
+            ->add('ville', TextType::class)
             ->add('codepostal')
             ->add('numtel',NumberType::class,[ 'attr'=>['placeholder'=>"votre numero"] ])
             ->add('numpermis',NumberType::class,[ 'attr'=>['placeholder'=>"votre numero permis"] ])
