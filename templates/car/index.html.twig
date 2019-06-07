@@ -30,7 +30,7 @@
                 <td>{{ car.model }}</td>
                 <td>{{ car.category }}</td>
                 <td>{{ car.carburant }}</td>
-                <td>{{ car.year }}</td>
+                <td>{{ car.year  ? car.year|date('m-d-Y') : '' }}</td>
                 <td>{{ car.price }}</td>
                 <td>{{ car.caution }}</td>
                 <td>{{ car.boitAVitesse ? 'Yes' : 'No' }}</td>

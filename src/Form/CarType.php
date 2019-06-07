@@ -6,6 +6,9 @@ use App\Entity\Car;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
+use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
+use Symfony\Component\Form\Extension\Core\Type\DateType;
 
 class CarType extends AbstractType
 {
@@ -15,12 +18,18 @@ class CarType extends AbstractType
             ->add('matricule')
             ->add('marque')
             ->add('model')
-            ->add('category')
+            ->add('category', ChoiceType::class, [
+                'choices' => ['mariage' => false, 'citadine' => false],
+            ])
             ->add('carburant')
-            ->add('year')
+            ->add('year', DateType::class)
             ->add('price')
             ->add('caution')
-            ->add('boitAVitesse')
+            ->add('boitAVitesse', CheckboxType::class, [
+                'label'    => 'auto',
+                'required' => false,
+                
+            ])
             
         ;
     }

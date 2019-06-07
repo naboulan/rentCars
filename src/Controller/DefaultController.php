@@ -16,11 +16,18 @@ use Symfony\Component\Routing\Annotation\Route;
 class DefaultController extends AbstractController
 {
     /**
-     * @Route("/", name="home", methods={"GET"})
+     * @Route("/", name="home")
      */
     public function home()
     {
         return $this->render('home.html.twig');
     }
-    
+
+    /**
+     * @Route("/connection", name="home_login")
+     */
+    public function login()
+    {
+        return $this->render('home.html.twig');
+    }
 }

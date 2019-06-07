@@ -5,12 +5,20 @@ namespace App\Entity;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
+use Symfony\Component\Security\Core\User\UserInterface;
+use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\UserRepository")
+ * @UniqueEntity(
+ * fields= {"email"},
+ * message="l'email deja utiliser"
+ * )
  */
-class User
+class User implements UserInterface
 {
+    
     /**
      * @ORM\Id()
      * @ORM\GeneratedValue()
@@ -28,16 +36,29 @@ class User
         $this->locations = new ArrayCollection();
         $this->Messagerie = new ArrayCollection();
         $this->Car = new ArrayCollection();
-      
+       $this->isActive = true;
     }
     /**
      * @ORM\Column(type="string", length=255)
+     * @Assert\Email()
      */
     private $email;
     /**
      * @ORM\Column(type="string", length=255)
+     * @Assert\Length(
+     *      min = 8,
+     *      max = 20,
+     *      minMessage = "Your password must be at least {{ limit }} characters long",
+     *      maxMessage = "Your password cannot be longer than {{ limit }} characters"
+     * )
+     
      */
     private $mdp;
+    /**
+     * @Assert\EqualTo(propertyPath="mdp",message="confirmation doit etre agale au mot de passe")
+     */
+     
+    public $mdp2;
     /**
      * @ORM\Column(type="string", length=255)
      */
@@ -47,7 +68,7 @@ class User
      */
     private $prenom;
      /**
-     *@ORM\Column(type="date")
+     *@ORM\Column(type="datetime")
      */
     private $datedenaissance;
      /**
@@ -71,7 +92,7 @@ class User
      */
     private $numpermis;
  /**
-     * @ORM\Column(type="integer")
+     * @ORM\Column(type="date")
      */
     private $anneepermis;
 
@@ -91,6 +112,11 @@ class User
      * @ORM\OneToMany(targetEntity="App\Entity\User", mappedBy="user")
      */
     private $Car;
+
+    /**
+     * @ORM\Column(type="boolean")
+     */
+    private $isActive;
 
 
     public function getemail(): ?string
@@ -145,7 +171,7 @@ class User
         return $this->datedenaissance;
     }
 
-    public function setdatedenaissance(date $datedenaissance): self
+    public function setdatedenaissance($datedenaissance): self
     {
         $this->datedenaissance = $datedenaissance;
 
@@ -211,16 +237,40 @@ class User
         return $this;
     }
 
-    public function getanneepermis(): ?int
+    public function getanneepermis()
     {
         return $this->anneepermis;
     }
 
-    public function setanneepermis(int $anneepermis): self
+    public function setanneepermis($anneepermis): self
     {
         $this->anneepermis = $anneepermis;
 
         return $this;
+    }
+    public function getRoles()
+    {
+        return array('ROLE_USER');
+    }
+
+    public function getPassword()
+    {
+        return $this->mdp;
+    }
+
+    public function getSalt()
+    {
+        
+    }
+
+    public function getUsername() 
+    {
+        return $this->email;
+    }
+
+    public function eraseCredentials()
+    {
+        return['ROLE_USER'];
     }
 
     /**

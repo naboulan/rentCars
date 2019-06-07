@@ -21,6 +21,7 @@ class UserType extends AbstractType
         $builder
             ->add('email' , EmailType::class,[ 'attr'=>['placeholder'=>"votre email"] ])
             ->add('mdp', PasswordType::class,[ 'attr'=>['placeholder'=>"votre password"] ])
+            ->add('mdp2', PasswordType::class,[ 'attr'=>['placeholder'=>"verifier votre password"] ])
             ->add('nom',TextType::class,[ 'attr'=>['placeholder'=>"votre nom"] ])
             ->add('prenom',TextType::class,[ 'attr'=>['placeholder'=>"votre prenom"] ])
             ->add('datedenaissance', BirthdayType::class, [
@@ -35,9 +36,7 @@ class UserType extends AbstractType
             ->add('codepostal')
             ->add('numtel',NumberType::class,[ 'attr'=>['placeholder'=>"votre numero"] ])
             ->add('numpermis',NumberType::class,[ 'attr'=>['placeholder'=>"votre numero permis"] ])
-            ->add('anneepermis', DateType::class, [
-                'widget' => 'choice',
-            ])
+            ->add('anneepermis', DateType::class)
            
         ;
     }

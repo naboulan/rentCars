@@ -44,7 +44,7 @@ class Car
     private $carburant;
 
     /**
-     * @ORM\Column(type="integer")
+     * @ORM\Column(type="date")
      */
     private $year;
 
@@ -152,12 +152,12 @@ class Car
         return $this;
     }
 
-    public function getYear(): ?int
+    public function getYear(): ?date
     {
         return $this->year;
     }
 
-    public function setYear(int $year): self
+    public function setYear(date $year): self
     {
         $this->year = $year;
 
