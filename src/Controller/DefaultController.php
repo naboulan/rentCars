@@ -21,13 +21,21 @@ class DefaultController extends AbstractController
     public function home()
     {
         return $this->render('home.html.twig');
+        
     }
 
     /**
-     * @Route("/connection", name="home_login")
+     * @Route("/deconnection", name="home_logout")
      */
-    public function login()
+    public function logout()
     {
-        return $this->render('home.html.twig');
+        
+    }
+    /**
+     * @Route("/profil", name="home_profil")
+     */
+    public function profil()
+    {
+        return $this->render('profil.html.twig');  
     }
 }

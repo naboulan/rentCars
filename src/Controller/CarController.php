@@ -15,6 +15,8 @@ use Symfony\Component\Routing\Annotation\Route;
  */
 class CarController extends AbstractController
 {
+    
+    
     /**
      * @Route("/", name="car_index", methods={"GET"})
      */
@@ -23,13 +25,15 @@ class CarController extends AbstractController
         return $this->render('car/index.html.twig', [
             'cars' => $carRepository->findAll(),
         ]);
+        
+
     }
 
     /**
      * @Route("/new", name="car_new", methods={"GET","POST"})
      */
     public function new(Request $request): Response
-    {
+    { $this->denyAccessUnlessGranted('ROLE_USER');
         $car = new Car();
         $form = $this->createForm(CarType::class, $car);
         $form->handleRequest($request);
@@ -47,7 +51,8 @@ class CarController extends AbstractController
             'form' => $form->createView(),
         ]);
     }
-
+    
+   
     /**
      * @Route("/{id}", name="car_show", methods={"GET"})
      */
@@ -79,6 +84,7 @@ class CarController extends AbstractController
             'form' => $form->createView(),
         ]);
     }
+    
 
     /**
      * @Route("/{id}", name="car_delete", methods={"DELETE"})
@@ -93,4 +99,5 @@ class CarController extends AbstractController
 
         return $this->redirectToRoute('car_index');
     }
+    
 }

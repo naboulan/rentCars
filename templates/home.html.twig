@@ -5,9 +5,12 @@
 
 <nav class="navbar navbar-expand-lg navbar-light bg-light">
     <a class="navbar-brand" href="/">Rent&Go</a>
-    {% if is_granted('ROLE_USER') %}
-     <div>Bienvenue dans notre site</div>
+    {%  if is_granted('ROLE_USER') %}
+    <a href="{{ path('home_profil') }}" class="nav-link">(Mon profil)</a>
+    <a href="{{ path('home_logout')}}" class="nav-link">Deconnexion</a>
+    <div class="btn-group-vertical pull-right"><a href="{{ path('car_new') }}"class=pull-right>ajouter une voiture</a></div>
     {% else %}
+    <div class="btn-group-vertical pull-right"><a href="{{ path('user_new') }}"class=pull-right>ajouter une voiture</a></div>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
