@@ -40,6 +40,7 @@ class CarController extends AbstractController
 
         if ($form->isSubmitted() && $form->isValid()) {
             $entityManager = $this->getDoctrine()->getManager();
+            $car->setUser($this->getUser()); 
             $entityManager->persist($car);
             $entityManager->flush();
 

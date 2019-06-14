@@ -44,7 +44,7 @@ class Car
     private $carburant;
 
     /**
-     * @ORM\Column(type="date")
+     * @ORM\Column(type="datetime")
      */
     private $year;
 
@@ -152,7 +152,7 @@ class Car
         return $this;
     }
 
-    public function getYear(): ?date
+    public function getYear()
     {
         return $this->year;
     }
