@@ -5,6 +5,7 @@ namespace App\Repository;
 use App\Entity\Car;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Symfony\Bridge\Doctrine\RegistryInterface;
+use App\Entity\User;
 
 /**
  * @method Car|null find($id, $lockMode = null, $lockVersion = null)
@@ -18,6 +19,8 @@ class CarRepository extends ServiceEntityRepository
     {
         parent::__construct($registry, Car::class);
     }
+
+    
 
     // /**
     //  * @return Car[] Returns an array of Car objects
@@ -47,4 +50,30 @@ class CarRepository extends ServiceEntityRepository
         ;
     }
     */
-}
+
+    public function searchBy(array $filters )
+    { 
+        return $this->createQueryBuilder('c')
+        ->join('c.user', 'u', 'WITH', 'c.user = u.id')
+       // ->join('c.location', 'l', 'WITH', 'c.location = l.id')   ,'l.datedebut > datef','l.datefin < dated'
+        ->andWhere( 'u.ville like :city')
+        ->setParameter('city', '%'.$filters['city'].'%')
+        ->getQuery()
+        ->getResult();
+    
+    
+    } 
+    public function findlate():array
+    { 
+        return $this->createQueryBuilder('c')
+        ->join('c.user', 'u', 'WITH', 'c.user = u.id')
+       // ->join('c.location', 'l', 'WITH', 'c.location = l.id')   ,'l.datedebut > datef','l.datefin < dated'
+        ->setMaxResults(10)
+        ->getQuery()
+        ->getResult();
+    
+    
+    } 
+ }
+
+

@@ -10,7 +10,7 @@ use Doctrine\Migrations\AbstractMigration;
 /**
  * Auto-generated Migration: Please modify to your needs!
  */
-final class Version20190530125625 extends AbstractMigration
+final class Version20190615120343 extends AbstractMigration
 {
     public function getDescription() : string
     {
@@ -22,9 +22,7 @@ final class Version20190530125625 extends AbstractMigration
         // this up() migration is auto-generated, please modify it to your needs
         $this->abortIf($this->connection->getDatabasePlatform()->getName() !== 'mysql', 'Migration can only be executed safely on \'mysql\'.');
 
-        $this->addSql('ALTER TABLE user DROP FOREIGN KEY FK_8D93D649A76ED395');
-        $this->addSql('DROP INDEX IDX_8D93D649A76ED395 ON user');
-        $this->addSql('ALTER TABLE user DROP user_id, CHANGE datedenaissance datedenaissance DATETIME NOT NULL, CHANGE anneepermis anneepermis DATE NOT NULL');
+        $this->addSql('ALTER TABLE car CHANGE location_id location_id INT DEFAULT NULL');
     }
 
     public function down(Schema $schema) : void
@@ -32,8 +30,6 @@ final class Version20190530125625 extends AbstractMigration
         // this down() migration is auto-generated, please modify it to your needs
         $this->abortIf($this->connection->getDatabasePlatform()->getName() !== 'mysql', 'Migration can only be executed safely on \'mysql\'.');
 
-        $this->addSql('ALTER TABLE user ADD user_id INT DEFAULT NULL, CHANGE datedenaissance datedenaissance DATE NOT NULL, CHANGE anneepermis anneepermis INT NOT NULL');
-        $this->addSql('ALTER TABLE user ADD CONSTRAINT FK_8D93D649A76ED395 FOREIGN KEY (user_id) REFERENCES user (id)');
-        $this->addSql('CREATE INDEX IDX_8D93D649A76ED395 ON user (user_id)');
+        $this->addSql('ALTER TABLE car CHANGE location_id location_id INT NOT NULL');
     }
 }

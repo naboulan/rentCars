@@ -44,7 +44,7 @@ class Car
     private $carburant;
 
     /**
-     * @ORM\Column(type="datetime")
+     * @ORM\Column(type="string")
      */
     private $year;
 
@@ -70,7 +70,7 @@ class Car
     private $commentaire;
    /**
      * @ORM\OneToOne(targetEntity="App\Entity\Car", cascade={"persist", "remove"})
-     * @ORM\JoinColumn(nullable=false)
+     * @ORM\JoinColumn(nullable=true)
      */
     private $location;
 
@@ -157,7 +157,7 @@ class Car
         return $this->year;
     }
 
-    public function setYear(date $year): self
+    public function setYear(string $year): self
     {
         $this->year = $year;
 

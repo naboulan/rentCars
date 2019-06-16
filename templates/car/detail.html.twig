@@ -1,0 +1,84 @@
+{% extends 'base.html.twig' %}
+{% block style %} 
+            <link rel="stylesheet" href="{{ asset('https://use.fontawesome.com/releases/v5.1.0/css/all.css') }}" integrity="sha384-lKuwvrZot6UHsBSfcMvOkWwlCMgc0TaWr+30HWe3a4ltaBwTZhyTEggF5tJv8tbt" crossorigin="anonymous">
+            <link href="{{ asset('css/detail.css') }}" rel="stylesheet" /> 
+            <script src="{{ asset('//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js') }}"></script>
+            <script src="{{ asset('//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js') }}"></script>
+    
+  {% endblock %}
+{% block body %}
+<div class="container pt-3 pb-5">
+<div class="page-sidebar">
+<div class="page-sidebar-content pt-3" itemscope="" itemtype="http://schema.org/Product">
+
+<h1 class="h1-2 entry-title entry-title--lg"><span class="first-word"> {{car.modele}}Prix Seat</span> Ibiza URBAN 1.6 MPi 110 ch Automatique</h1>
+                         
+<div class="row price-details my-4">
+  <div class="d-none d-md-block col-md-4"><div class=" price-thumb">
+    <div class="img"><img src="..." alt="..." class="img-thumbnail"></div>
+    </div>
+  </div>
+</div>
+<div class="price-options mb-4" itemprop="description">      
+<div class="row price-table">      
+<div class="col-12">
+<div class="block-heading block-heading--line-around mt-5">
+	<h4 class="block-heading__title">
+		Moteur
+    </h4>
+</div>               
+</div>           
+<div class="col-12 col-sm-6 col-md-5"><div class="price-td-name mt-1">Energie</div></div>
+<div class="col-12 col-sm-6 col-md-7"><div class="price-td-value mt-1">
+Essence 
+</div></div>
+<div class="col-12 col-sm-6 col-md-5"><div class="price-td-name mt-1">Boite</div></div>
+<div class="col-12 col-sm-6 col-md-7"><div class="price-td-value mt-1">
+Automatique 
+</div></div>
+<div class="col-12 col-sm-6 col-md-5"><div class="price-td-name mt-1">Cylindrée</div></div>
+<div class="col-12 col-sm-6 col-md-7"><div class="price-td-value mt-1">
+1598 cc
+</div></div>
+<div class="col-12 col-sm-6 col-md-5"><div class="price-td-name mt-1">Nbr cylindres</div></div>
+<div class="col-12 col-sm-6 col-md-7"><div class="price-td-value mt-1">
+4 
+</div></div>
+<div class="col-12 col-sm-6 col-md-5"><div class="price-td-name mt-1">Type moteur</div></div>
+<div class="col-12 col-sm-6 col-md-7"><div class="price-td-value mt-1">
+en ligne 
+</div></div>
+<div class="col-12 col-sm-6 col-md-5"><div class="price-td-name mt-1">Puissance</div></div>
+<div class="col-12 col-sm-6 col-md-7"><div class="price-td-value mt-1">
+110 ch
+</div></div>
+<div class="col-12 col-sm-6 col-md-5"><div class="price-td-name mt-1">Puissance tr</div></div>
+<div class="col-12 col-sm-6 col-md-7"><div class="price-td-value mt-1">
+5800 
+</div></div>
+<div class="col-12 col-sm-6 col-md-5"><div class="price-td-name mt-1">Couple</div></div>
+<div class="col-12 col-sm-6 col-md-7"><div class="price-td-value mt-1">
+155  Nm  - 3800tr/min nm
+</div></div>
+<div class="col-12 col-sm-6 col-md-5"><div class="price-td-name mt-1">Reservoir</div></div>
+<div class="col-12 col-sm-6 col-md-7"><div class="price-td-value mt-1">
+55 l
+</div></div>
+<div class="col-12 col-sm-6 col-md-5"><div class="price-td-name mt-1">Vitesse max</div></div>
+<div class="col-12 col-sm-6 col-md-7"><div class="price-td-value mt-1">
+189 km/h
+</div></div>
+<div class="col-12 col-sm-6 col-md-5"><div class="price-td-name mt-1">Acceleration de 0 à 100</div></div>
+<div class="col-12 col-sm-6 col-md-7"><div class="price-td-value mt-1">
+10.5 s
+</div></div>
+<div class="col-12 col-sm-6 col-md-5"><div class="price-td-name mt-1">Consomation</div></div>
+<div class="col-12 col-sm-6 col-md-7"><div class="price-td-value mt-1">
+6.4 l/100km
+</div></div>
+<div class="col-12 col-sm-6 col-md-5"><div class="price-td-name mt-1">Soupapes</div></div>
+<div class="col-12 col-sm-6 col-md-7"><div class="price-td-value mt-1">
+16 
+</div></div>
+</div>   
+{% endblock %}

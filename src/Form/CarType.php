@@ -22,7 +22,7 @@ class CarType extends AbstractType
                 'choices' => ['mariage' => false, 'citadine' => false],
             ])
             ->add('carburant')
-            ->add('year', DateType::class)
+            ->add('year')
             ->add('price')
             ->add('caution')
             ->add('boitAVitesse', CheckboxType::class, [

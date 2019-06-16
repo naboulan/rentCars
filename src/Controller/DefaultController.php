@@ -10,17 +10,30 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use App\Entity\User;
+
+use Doctrine\ORM\EntityManagerInterface;
 /**
  * @Route("/")
  */
 class DefaultController extends AbstractController
 {
+    
+     /**
+     * @var EntityManagerInterface
+     */
+    private $entityManager;
+
+    public function __construct(EntityManagerInterface $entityManager)
+    {
+        $this->entityManager = $entityManager;
+    }
     /**
      * @Route("/", name="home")
      */
     public function home()
     {
-        return $this->render('home.html.twig');
+        $cars = $this->entityManager->getRepository(Car::class)->findlate();
+        return $this->render('home.html.twig', array( 'cars' => $cars));
 
     }
 
@@ -31,13 +44,7 @@ class DefaultController extends AbstractController
     {
         
     }
-    /**
-     * @Route("/profil", name="home_profil")
-     */
-    public function profil()
-    {
-       return $this->render('profil.html.twig');
-    }
+   
 
     /**
      * @Route("/base", name="home_base")
@@ -48,4 +55,28 @@ class DefaultController extends AbstractController
         
         return $this->render('base.html.twig'); 
     }
+     
+ 
+    
+     /**
+     * @Route("/search", name="search", methods={"POST"})
+     */
+    public function search(Request $request)
+    {
+        
+        $filters = [ 'city' => $request->request->get('city')];
+        $cars = $this->entityManager->getRepository(Car::class)->searchBy($filters);
+        return $this->render('recherche.html.twig', array( 'cars' => $cars)); 
+    }
+     
+ 
+    
+     /**
+     * @Route("/profil", name="home_profil")
+     */
+    public function profil()
+    {
+       return $this->render('profil.html.twig');
+    }
+    
 }

@@ -1,0 +1,39 @@
+{% extends 'base.html.twig' %}
+ {% block style %} 
+            <link rel="stylesheet" href="{{ asset('https://use.fontawesome.com/releases/v5.1.0/css/all.css') }}" integrity="sha384-lKuwvrZot6UHsBSfcMvOkWwlCMgc0TaWr+30HWe3a4ltaBwTZhyTEggF5tJv8tbt" crossorigin="anonymous">
+
+            <script src="{{ asset('//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js') }}"></script>
+            <script src="{{ asset('//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js') }}"></script>
+    
+  {% endblock %}
+{% block body %}
+
+
+       
+       <div class="container">
+       <h2> Resultat de votre recherche </h2>
+       <div class="row flex">
+        {% for car in cars %}
+            <div class="col-3">
+              <div class="card">
+                  <div class="card-body">
+                   <div class="img"><img src="..." alt="..." class="img-thumbnail"></div>
+                   <h5 class="card-title">
+                     <a href="#"> {{car.marque}}  {{car.model}}</a>
+                     </h5>
+                     <p class="card-text">{{car.carburant}}</p>
+                     <div class="text-primary">{{car.price}}DA</div>
+                   </div>
+               </div>         
+            </div>
+                
+        {% else %}
+            <tr>
+                <td colspan="11">no records found</td>
+            </tr>
+        {% endfor %}
+     </div>
+     </div>   
+    
+
+{% endblock %}

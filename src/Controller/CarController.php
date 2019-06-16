@@ -33,7 +33,8 @@ class CarController extends AbstractController
      * @Route("/new", name="car_new", methods={"GET","POST"})
      */
     public function new(Request $request): Response
-    { $this->denyAccessUnlessGranted('ROLE_USER');
+    { 
+        $this->denyAccessUnlessGranted('ROLE_USER');
         $car = new Car();
         $form = $this->createForm(CarType::class, $car);
         $form->handleRequest($request);
@@ -53,7 +54,6 @@ class CarController extends AbstractController
         ]);
     }
     
-   
     /**
      * @Route("/{id}", name="car_show", methods={"GET"})
      */
@@ -100,5 +100,22 @@ class CarController extends AbstractController
 
         return $this->redirectToRoute('car_index');
     }
+
+    /**
+     * @Route("/detail/{id}", name="car_detail", methods={"GET","POST"})
+     */
+    public function detail( $id) 
+    {
+       $cars = $this->getDoctrine()->getRepository(Car::class);
+         $repo =$cars->find($id);
+        return $this->render('car/detail.html.twig',[
+            'car'=> $repo
+            
+        ]);
+    }
+
     
+    
+    
+
 }
