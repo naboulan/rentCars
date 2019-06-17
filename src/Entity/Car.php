@@ -69,7 +69,7 @@ class Car
      */
     private $commentaire;
    /**
-     * @ORM\OneToMany(targetEntity="App\Entity\Car", mappedBy="car")
+     * @ORM\OneToMany(targetEntity="App\Entity\location", mappedBy="Car")
      */
     private $locations;
 

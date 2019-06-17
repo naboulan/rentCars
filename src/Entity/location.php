@@ -31,7 +31,7 @@ class location
     private $User;
 
     /**
-     * @ORM\ManyToOne(targetEntity="App\Entity\location", inversedBy="locations")
+     * @ORM\ManyToOne(targetEntity="App\Entity\Car", inversedBy="locations")
      */
     private $Car;
 

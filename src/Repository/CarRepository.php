@@ -59,7 +59,7 @@ class CarRepository extends ServiceEntityRepository
        // var_dump($endDate, $startDate);die;
         return $this->createQueryBuilder('c')
         ->join('c.user', 'u', 'WITH','c.user = u.id')
-        ->join('c.locations', 'l')
+        ->leftJoin('c.locations', 'l')
         ->andWhere('l.datedebut > :datef')
         ->setParameter('datef', $endDate)
         ->orWhere('l.datefin < :dated')
