@@ -19,7 +19,7 @@
                   <div class="card-body">
                    <div class="img"><img src="..." alt="..." class="img-thumbnail"></div>
                    <h5 class="card-title">
-                     <a href="#"> {{car.marque}}  {{car.model}}</a>
+                     <a href="{{ path('car_detail', {'id':car.id}) }}"> {{car.marque}}  {{car.model}}</a>
                      </h5>
                      <p class="card-text">{{car.carburant}}</p>
                      <div class="text-primary">{{car.price}}DA</div>

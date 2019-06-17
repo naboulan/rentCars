@@ -69,10 +69,9 @@ class Car
      */
     private $commentaire;
    /**
-     * @ORM\OneToOne(targetEntity="App\Entity\Car", cascade={"persist", "remove"})
-     * @ORM\JoinColumn(nullable=true)
+     * @ORM\OneToMany(targetEntity="App\Entity\Car", mappedBy="car")
      */
-    private $location;
+    private $locations;
 
     /**
      * @ORM\ManyToOne(targetEntity="App\Entity\User", inversedBy="rcu")
@@ -82,6 +81,7 @@ class Car
     public function __construct()
     {
         $this->commentaire = new ArrayCollection();
+        $this->locations = new ArrayCollection();
     }
 
 
@@ -243,17 +243,38 @@ class Car
         return $this;
     }
 
-    public function getLocation(): ?location
+    /**
+     * @return Collection|self[]
+     */
+    public function getLocations(): Collection
     {
-        return $this->location;
+        return $this->locations;
     }
 
-    public function setLocation(?location $location): self
+    public function addLocations(self $locations): self
     {
-        $this->location = $location;
+        if (!$this->locations->contains($locations)) {
+            $this->locations[] = $locations;
+            $locations->setCar($this);
+        }
 
         return $this;
     }
+
+    public function removeLocations(self $locations): self
+    {
+        if ($this->locations->contains($locations)) {
+            $this->locations->removeElement($locations);
+            // set the owning side to null (unless already changed)
+            if ($locations->getCar() === $this) {
+                $locations->setCar(null);
+            }
+        }
+
+        return $this;
+    }
+
+   
 
     public function getUser(): ?User
     {

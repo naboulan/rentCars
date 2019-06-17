@@ -23,23 +23,21 @@
                                     </div>
                                     <!--end of col-->
                                 </div>
+                               <div class="row">
+                                    <div class="col-md-6">
+                                        <h3>Date  Debut</h3>
+                                        <input type="date" name="dated" id="debut" width="270">
+                                    </div>
+                                    <div class="col-md-6">
+                                        <h3>Date  Fin</h3>
+                                        <input type="date" name="datef" id="fin">
+                                    </div>
+                                </div>
                             </form>
                         </div>
                         <!--end of col-->
                     </div>
     </section>
-<form class="date" action="{{ path('search') }}" method="POST">
-    <div class="row">
-        <div class="col-md-6">
-            <h3>Date  Debut</h3>
-            <input type="date" name="dated" id="debut" width="270">
-        </div>
-        <div class="col-md-6">
-            <h3>Date  Fin</h3>
-            <input type="date" name="datef" id="fin">
-        </div>
-    </div>
-    </form>
 </div>
 
 <div class="container" mt>
@@ -51,7 +49,7 @@
                   <div class="card-body">
                    <div class="img"><img src="..." alt="..." class="img-thumbnail"></div>
                    <h5 class="card-title">
-                     <a href="{{ path('car_detail') }}">   {{car.model}}</a>
+                     <a href="{{ path('car_detail', {'id':car.id}) }}">   {{car.model}}</a>
                      </h5>
                      <p class="card-text">{{car.carburant}}</p>
                      <div class="text-primary">{{car.price}}DA</div>

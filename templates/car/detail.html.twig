@@ -11,7 +11,7 @@
 <div class="page-sidebar">
 <div class="page-sidebar-content pt-3" itemscope="" itemtype="http://schema.org/Product">
 
-<h1 class="h1-2 entry-title entry-title--lg"><span class="first-word"> {{car.modele}}Prix Seat</span> Ibiza URBAN 1.6 MPi 110 ch Automatique</h1>
+<h1 class="h1-2 entry-title entry-title--lg"><span class="first-word"> {{car.model}}Prix Seat</span> Ibiza URBAN 1.6 MPi 110 ch Automatique</h1>
                          
 <div class="row price-details my-4">
   <div class="d-none d-md-block col-md-4"><div class=" price-thumb">
@@ -80,5 +80,6 @@ en ligne
 <div class="col-12 col-sm-6 col-md-7"><div class="price-td-value mt-1">
 16 
 </div></div>
+<a class="btn btn-primary" href="{{ path('request_rent', {'id': car.id}) }}"> Demande de location</a>
 </div>   
 {% endblock %}

@@ -31,14 +31,13 @@ class location
     private $User;
 
     /**
-     * @ORM\OneToOne(targetEntity="App\Entity\location", cascade={"persist", "remove"})
-     * @ORM\JoinColumn(nullable=false)
+     * @ORM\ManyToOne(targetEntity="App\Entity\location", inversedBy="locations")
      */
     private $Car;
 
     /**
      * @ORM\OneToOne(targetEntity="App\Entity\location", cascade={"persist", "remove"})
-     * @ORM\JoinColumn(nullable=false)
+     * @ORM\JoinColumn(nullable=true)
      */
     private $Etatdl;
     public function getdatedebut(): ?date
