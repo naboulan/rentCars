@@ -63,13 +63,30 @@ class DefaultController extends AbstractController
      */
     public function search(Request $request)
     {
-        
         $filters = [ 'city' => $request->request->get('city'),
                      'dated' => $request->request->get('dated'),
                      'datef' => $request->request->get('datef')
                     ];
+
+                
+        $endDate = new \DateTime ($filters['datef']);
+        $startDate =  new \DateTime ($filters['dated']);
+
         $cars = $this->entityManager->getRepository(Car::class)->searchBy($filters);
-        return $this->render('recherche.html.twig', array( 'cars' => $cars)); 
+
+        foreach($cars as $car) {
+            if(count($car->getLocations()) == 0) {               
+                $results [] = $car;
+                continue;
+            }
+
+            foreach($car->getLocations() as $location){
+                if($location->getdatedebut() > $endDate || $location->getdatefin() < $startDate){
+                    $results [] = $car;
+                }
+            }
+        }
+        return $this->render('recherche.html.twig', array( 'cars' => $results)); 
     }
      
  

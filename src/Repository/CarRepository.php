@@ -53,22 +53,18 @@ class CarRepository extends ServiceEntityRepository
 
     public function searchBy(array $filters )
     { 
-        $endDate = new \DateTime ($filters['datef']);
-        $startDate =  new \DateTime ($filters['dated']);
+       
+        $query= $this->createQueryBuilder('c')
+                    ->join('c.user', 'u', 'WITH','c.user = u.id')
+                    ->leftJoin('c.locations', 'l');
 
-       // var_dump($endDate, $startDate);die;
-        return $this->createQueryBuilder('c')
-        ->join('c.user', 'u', 'WITH','c.user = u.id')
-        ->leftJoin('c.locations', 'l')
-        ->andWhere('l.datedebut > :datef')
-        ->setParameter('datef', $endDate)
-        ->orWhere('l.datefin < :dated')
-        ->setParameter('dated',$startDate)
-        ->andWhere( 'u.ville like :city')
-        ->setParameter('city', '%'.$filters['city'].'%')
-        ->getQuery()
-        ->getResult();
-    
+        if ($filters['city']) {
+            $query->andWhere( 'u.ville like :city')
+                  ->setParameter('city', '%'.$filters['city'].'%');
+        }
+        
+
+        return $query->getQuery()->getResult();
     
     } 
     public function findlate():array

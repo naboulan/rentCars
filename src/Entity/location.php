@@ -40,23 +40,23 @@ class location
      * @ORM\JoinColumn(nullable=true)
      */
     private $Etatdl;
-    public function getdatedebut(): ?date
+    public function getdatedebut()
     {
         return $this->datedebut;
     }
 
-    public function setdatedebut(int $datedebut): self
+    public function setdatedebut(int $datedebut)
     {
         $this->datedebut = $datedebut;
 
         return $this;
     }
-    public function getdatefin(): ?date
+    public function getdatefin()
     {
         return $this->datefin;
     }
 
-    public function setdatefin(int $datefin): self
+    public function setdatefin(int $datefin)
     {
         $this->datefin = $datefin;
 
