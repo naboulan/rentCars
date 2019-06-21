@@ -3,18 +3,45 @@
 {% block stylesheets %}
     {{ parent() }}
     <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.6.0/css/bootstrap-datepicker.css">
+<link href="{{ asset('css/request.css') }}" rel="stylesheet" />
 {% endblock %}
 
 {% block title %}Location{% endblock %}
 
 {% block body %}
-<div class="container">
-{{ form_start(form) }}
-    {{ form_widget(form) }}
-    
-    <button class="btn btn-danger">{{ button_label|default('sinscrire') }}</button>
-{{ form_end(form) }}
+
+<div class="container mt-sm-5">
+	<div class="row">
+		<h2> a propos votre location </h2>
+	</div>
+    <hr>
+            <div class="row row-margin-bottom">
+            <div class="col-md-5 no-padding lib-item" data-category="view">
+                <div class="lib-panel">
+                    <div class="row box-shadow">
+                        <div class="col-md-6">
+                            <img class="lib-img-show" src="">
+                        </div>
+                        <div class="col-md-6">
+                            <div class="lib-row lib-header">
+                                {{car.model}} {{car.marque}}
+                                <div class="lib-header-seperator"></div>
+                            </div>
+                            <div class="lib-row lib-desc">
+                            Type:{{car.category}} <br>
+                               Date debut:{{startdate|date('d/m/Y')}}     <br>             Date fin:{{enddate|date('d/m/Y')}}
+                               <br>
+                               pour une durée de {{diff}} jours  votre solde sera <br>
+                               PRIX:{{car.price * diff}}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
 </div>
+<a class="btn btn-primary" href="{{ path('validation_rent', {'id': car.id })}}"> Validation</a>
+
 
 
 {% endblock %}

@@ -2,6 +2,7 @@
 
 namespace App\Entity;
 
+use App\Entity\Car;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -29,7 +30,6 @@ class location
      * @ORM\ManyToOne(targetEntity="App\Entity\User", inversedBy="locations")
      */
     private $User;
-
     /**
      * @ORM\ManyToOne(targetEntity="App\Entity\Car", inversedBy="locations")
      */
@@ -45,7 +45,7 @@ class location
         return $this->datedebut;
     }
 
-    public function setdatedebut(int $datedebut)
+    public function setdatedebut(\Datetime $datedebut)
     {
         $this->datedebut = $datedebut;
 
@@ -56,7 +56,7 @@ class location
         return $this->datefin;
     }
 
-    public function setdatefin(int $datefin)
+    public function setdatefin(\Datetime $datefin)
     {
         $this->datefin = $datefin;
 
@@ -80,7 +80,7 @@ class location
         return $this->Car;
     }
 
-    public function setCar(self $Car): self
+    public function setCar(Car $Car): self
     {
         $this->Car = $Car;
 

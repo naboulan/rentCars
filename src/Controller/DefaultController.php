@@ -10,11 +10,10 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use App\Entity\User;
-
+use App\Repository\UserRepository;
+use Symfony\Component\HttpFoundation\Session\SessionInterface;
 use Doctrine\ORM\EntityManagerInterface;
-/**
- * @Route("/")
- */
+
 class DefaultController extends AbstractController
 {
     
@@ -23,17 +22,24 @@ class DefaultController extends AbstractController
      */
     private $entityManager;
 
-    public function __construct(EntityManagerInterface $entityManager)
+    private $session;
+
+    public function __construct(EntityManagerInterface $entityManager, SessionInterface $session)
     {
         $this->entityManager = $entityManager;
+        $this->session = $session;
     }
     /**
      * @Route("/", name="home")
      */
     public function home()
-    {
+    {   $user = null;
+        if ($this->getUser()) {
+            $user = $this->getUser();
+        }
         $cars = $this->entityManager->getRepository(Car::class)->findlate();
-        return $this->render('home.html.twig', array( 'cars' => $cars));
+
+        return $this->render('home.html.twig', array( 'cars' => $cars, 'user'=>$user));
 
     }
 
@@ -47,13 +53,14 @@ class DefaultController extends AbstractController
    
 
     /**
-     * @Route("/base", name="home_base")
+     * @Route("/base/{id}", name="home_base")
      */
-    public function base()
+    public function base(Request $request, $id)
     
     {
-        
-        return $this->render('base.html.twig'); 
+        $this->denyAccessUnlessGranted('ROLE_USER');
+        $user = $this->getDoctrine()->getRepository(User::class)->find($id);
+        return $this->render('base.html.twig',['user'=>$user]);
     }
      
  
@@ -63,6 +70,10 @@ class DefaultController extends AbstractController
      */
     public function search(Request $request)
     {
+        $user = null;
+        if ($this->getUser()) {
+            $user = $this->getUser();
+        }
         $filters = [ 'city' => $request->request->get('city'),
                      'dated' => $request->request->get('dated'),
                      'datef' => $request->request->get('datef')
@@ -71,6 +82,10 @@ class DefaultController extends AbstractController
                 
         $endDate = new \DateTime ($filters['datef']);
         $startDate =  new \DateTime ($filters['dated']);
+
+        $this->session->set('endDate', $endDate);
+        $this->session->set('startDate', $startDate);
+        $this->session->set('city', $filters['city']);
 
         $cars = $this->entityManager->getRepository(Car::class)->searchBy($filters);
 
@@ -86,17 +101,20 @@ class DefaultController extends AbstractController
                 }
             }
         }
-        return $this->render('recherche.html.twig', array( 'cars' => $results)); 
+        return $this->render('recherche.html.twig', array( 'cars' => $results, 'user' => $user)); 
     }
      
  
     
      /**
-     * @Route("/profil", name="home_profil")
+     * @Route("/profil/{id}", name="home_profil")
      */
-    public function profil()
+    public function profil(Request $request, $id)
     {
-       return $this->render('profil.html.twig');
+        
+        $user = $this->getDoctrine()->getRepository(User::class)->find($id);
+    return $this->render('profil.html.twig',['user'=>$user,]);
+       
     }
     
 }

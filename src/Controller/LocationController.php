@@ -3,8 +3,9 @@
 namespace App\Controller;
 
 use App\Entity\Car;
-use App\Form\LocationType;
+use App\Entity\location as Location;
 use App\Repository\CarRepository;
+use Symfony\Component\HttpFoundation\Session\SessionInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -15,37 +16,61 @@ use Symfony\Component\Routing\Annotation\Route;
  */
 class LocationController extends AbstractController
 {
-    
+    private $session;
+
+    public function __construct(SessionInterface $session)
+    {
+        $this->session = $session;
+    }
+
     /**
      * @Route("/request/rent/{id}", name="request_rent")
      */
     public function requestRent(Request $request, $id)
     {
-
+        $this->denyAccessUnlessGranted('ROLE_USER');
         $car = $this->getDoctrine()->getRepository(Car::class)->find($id);
 
-        $form = $this->createForm(LocationType::class);
-        $form->handleRequest($request);
-        
-     /*   if ($form->isSubmitted() && $form->isValid()) {
-
-            $entityManager = $this->getDoctrine()->getManager();
-            $hash= $encoder->encodePassword($user,$user->getmdp());
-            $user->setmdp($hash);
-            $entityManager->persist($user);
-            $entityManager->flush();
-
-            return $this->redirectToRoute('home');
-        }*/
-
+        $endDate = $this->session->get('endDate');
+        $startDate = $this->session->get('startDate');
+        $duree = $endDate->diff($startDate)->days;
        return $this->render('location/request_rent.html.twig',[
-           'car'=> $car,
-           'form' => $form->createView(),
+           'car'=> $car,'diff'=>$duree,'enddate'=>$endDate,'startdate'=>$startDate,
            
        ]);
+    
 
     }  
-    
-    
+    /**
+     * @Route("/validation/rent/{id}", name="validation_rent")
+     */
+    public function ValidationRent(Request $request, $id)
+    {
+        $this->denyAccessUnlessGranted('ROLE_USER');
+        $car = $this->getDoctrine()->getRepository(Car::class)->find($id);
 
+        $endDate = $this->session->get('endDate');
+        $startDate = $this->session->get('startDate');
+//jbjbj
+        $entityManager = $this->getDoctrine()->getManager();
+        $location = new Location();
+
+        $location->setdatedebut($startDate);
+        $location->setdatefin($endDate);
+        $location->setUser($this->getUser());
+
+        $car->addLocations($location);
+
+        $entityManager->persist($location);
+        $entityManager->persist($car);
+
+        $entityManager->flush();
+//khkhk
+          
+       return $this->render('profil.html.twig',[
+           'car'=> $car]);
+        
+
+    }
+   
 }

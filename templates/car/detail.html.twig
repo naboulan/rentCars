@@ -1,10 +1,6 @@
 {% extends 'base.html.twig' %}
 {% block style %} 
-            <link rel="stylesheet" href="{{ asset('https://use.fontawesome.com/releases/v5.1.0/css/all.css') }}" integrity="sha384-lKuwvrZot6UHsBSfcMvOkWwlCMgc0TaWr+30HWe3a4ltaBwTZhyTEggF5tJv8tbt" crossorigin="anonymous">
-            <link href="{{ asset('css/detail.css') }}" rel="stylesheet" /> 
-            <script src="{{ asset('//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js') }}"></script>
-            <script src="{{ asset('//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js') }}"></script>
-    
+            <link rel="stylesheet" href="{{ asset('https://use.fontawesome.com/releases/v5.1.0/css/all.css') }}" integrity="sha384-lKuwvrZot6UHsBSfcMvOkWwlCMgc0TaWr+30HWe3a4ltaBwTZhyTEggF5tJv8tbt" crossorigin="anonymous">   
   {% endblock %}
 {% block body %}
 <div class="container pt-3 pb-5">
@@ -80,6 +76,11 @@ en ligne
 <div class="col-12 col-sm-6 col-md-7"><div class="price-td-value mt-1">
 16 
 </div></div>
+{%  if is_granted('ROLE_USER') %}
 <a class="btn btn-primary" href="{{ path('request_rent', {'id': car.id}) }}"> Demande de location</a>
-</div>   
+{% else %} 
+<a class="btn btn-primary" href="#"> Demande de location</a>
+<p> Veuillez vous connecter</p>
+{% endif %}
+</div>  
 {% endblock %}

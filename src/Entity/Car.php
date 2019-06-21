@@ -2,6 +2,7 @@
 
 namespace App\Entity;
 
+use App\Entity\location as Location;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
@@ -251,7 +252,7 @@ class Car
         return $this->locations;
     }
 
-    public function addLocations(self $locations): self
+    public function addLocations(Location $locations): self
     {
         if (!$this->locations->contains($locations)) {
             $this->locations[] = $locations;
@@ -261,7 +262,7 @@ class Car
         return $this;
     }
 
-    public function removeLocations(self $locations): self
+    public function removeLocations(Location $locations): self
     {
         if ($this->locations->contains($locations)) {
             $this->locations->removeElement($locations);
