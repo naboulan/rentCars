@@ -19,7 +19,7 @@ class CarType extends AbstractType
             ->add('marque')
             ->add('model')
             ->add('category', ChoiceType::class, [
-                'choices' => ['mariage' => false, 'citadine' => false],
+                'choices' => ['Mariage' => 'mariage', 'Citadine' => 'citadine'],
             ])
             ->add('carburant')
             ->add('year')

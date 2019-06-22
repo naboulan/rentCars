@@ -52,18 +52,7 @@ class DefaultController extends AbstractController
     }
    
 
-    /**
-     * @Route("/base/{id}", name="home_base")
-     */
-    public function base(Request $request, $id)
-    
-    {
-        $this->denyAccessUnlessGranted('ROLE_USER');
-        $user = $this->getDoctrine()->getRepository(User::class)->find($id);
-        return $this->render('base.html.twig',['user'=>$user]);
-    }
-     
- 
+   
     
      /**
      * @Route("/search", name="search", methods={"POST"})

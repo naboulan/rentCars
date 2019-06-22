@@ -18,8 +18,8 @@ security:
 
             provider: in_database
             form_login: 
-                login_path: home_base
-                check_path: home_base
+                login_path: home
+                check_path: home
 
             logout:
                 path: home_logout

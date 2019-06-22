@@ -22,8 +22,12 @@ class CarController extends AbstractController
      */
     public function index(CarRepository $carRepository): Response
     {
+        $user = null;
+        if ($this->getUser()) {
+            $user = $this->getUser();
+        }
         return $this->render('car/index.html.twig', [
-            'cars' => $carRepository->findAll(),
+            'cars' => $carRepository->findAll(),'user'=>$user
         ]);
         
 
@@ -35,6 +39,10 @@ class CarController extends AbstractController
     public function new(Request $request): Response
     { 
         $this->denyAccessUnlessGranted('ROLE_USER');
+        $user = null;
+        if ($this->getUser()) {
+            $user = $this->getUser();
+        }
         $car = new Car();
         $form = $this->createForm(CarType::class, $car);
         $form->handleRequest($request);
@@ -50,7 +58,7 @@ class CarController extends AbstractController
 
         return $this->render('car/new.html.twig', [
             'car' => $car,
-            'form' => $form->createView(),
+            'form' => $form->createView(),'user'=>$user,
         ]);
     }
     
@@ -106,10 +114,14 @@ class CarController extends AbstractController
      */
     public function detail( $id) 
     {
+        $user = null;
+        if ($this->getUser()) {
+            $user = $this->getUser();
+        }
        $cars = $this->getDoctrine()->getRepository(Car::class);
          $repo =$cars->find($id);
         return $this->render('car/detail.html.twig',[
-            'car'=> $repo
+            'car'=> $repo, 'user' => $user
             
         ]);
     }

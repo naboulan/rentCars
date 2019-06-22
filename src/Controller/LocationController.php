@@ -29,13 +29,17 @@ class LocationController extends AbstractController
     public function requestRent(Request $request, $id)
     {
         $this->denyAccessUnlessGranted('ROLE_USER');
+        $user = null;
+        if ($this->getUser()) {
+            $user = $this->getUser();
+        }
         $car = $this->getDoctrine()->getRepository(Car::class)->find($id);
 
         $endDate = $this->session->get('endDate');
         $startDate = $this->session->get('startDate');
         $duree = $endDate->diff($startDate)->days;
        return $this->render('location/request_rent.html.twig',[
-           'car'=> $car,'diff'=>$duree,'enddate'=>$endDate,'startdate'=>$startDate,
+           'car'=> $car,'diff'=>$duree,'enddate'=>$endDate,'startdate'=>$startDate,'user'=>$user,
            
        ]);
     

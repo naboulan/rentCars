@@ -22,7 +22,7 @@
             <a class="navbar-brand" href="/">Rent&Go</a>
             
             {%  if is_granted('ROLE_USER') %}
-            <a href="{{ path('home_profil', {'id':user.id}) }}" class="nav-link">(Mon profil)</a>
+            <a href="{{ path('home_profil', {'id':user.id}) }}" class="nav-link">Bonjour mr {{user.nom}} {{user.prenom}}(Mon profil)</a>
             <a href="{{ path('home_logout')}}" class="nav-link">Deconnexion</a>
             <div class="btn-group-vertical pull-right"><a href="{{ path('car_new') }}"class=pull-right>ajouter une voiture</a></div>
             {% else %}
@@ -40,7 +40,7 @@
                   Se connecter
                 </a>
                 <div class="dropdown-menu">
-                    <form class="px-4 py-3" method="POST" action="{{path('home_base')}}">
+                    <form class="px-4 py-3" method="POST" action="{{path('home')}}">
                       <div class="form-group">
                         <label for="exampleDropdownFormEmail1">Email address</label>
                         <input type="email" class="form-control" name="_username" placeholder="email@example.com">
