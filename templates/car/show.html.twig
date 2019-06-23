@@ -1,6 +1,6 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Car{% endblock %}
+{% block title %}Voiture{% endblock %}
 
 {% block body %}
     <h1>{{car.marque}} {{car.model}}</h1>
@@ -11,7 +11,7 @@
         <tbody>
            
             <tr>
-                <th>Category</th>
+                <th>Catégorie</th>
                 <td>{{ car.category }}</td>
             </tr>
             <tr>
@@ -19,11 +19,11 @@
                 <td>{{ car.carburant }}</td>
             </tr>
             <tr>
-                <th>Year</th>
+                <th>Année</th>
                 <td>{{ car.year }}</td>
             </tr>
             <tr>
-                <th>Price</th>
+                <th>Prix</th>
                 <td>{{ car.price }}</td>
             </tr>
             <tr>
@@ -32,7 +32,7 @@
             </tr>
             <tr>
                 <th>Boit a vitesse manuelle</th>
-                <td>{{ car.boitAVitesse ? 'Yes' : 'No' }}</td>
+                <td>{{ car.boitAVitesse ? 'Oui' : 'Non' }}</td>
             </tr>
         </tbody>
     </table>

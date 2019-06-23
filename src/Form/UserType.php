@@ -19,24 +19,24 @@ class UserType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('email' , EmailType::class,[ 'attr'=>['placeholder'=>"votre email"] ])
-            ->add('mdp', PasswordType::class,[ 'attr'=>['placeholder'=>"votre password"] ])
-            ->add('mdp2', PasswordType::class,[ 'attr'=>['placeholder'=>"verifier votre password"] ])
-            ->add('nom',TextType::class,[ 'attr'=>['placeholder'=>"votre nom"] ])
-            ->add('prenom',TextType::class,[ 'attr'=>['placeholder'=>"votre prenom"] ])
-            ->add('datedenaissance', BirthdayType::class, [
+            ->add('email' , EmailType::class,[  'label_format' => 'Email', 'attr'=>['placeholder'=>"votre email"] ])
+            ->add('mdp', PasswordType::class,[ 'label_format' => 'Mot de passe', 'attr'=>['placeholder'=>"votre password"] ])
+            ->add('mdp2', PasswordType::class,[ 'label_format' => 'Confirmation du mot de passe', 'attr'=>['placeholder'=>"verifier votre password"] ])
+            ->add('nom',TextType::class,[ 'label_format' => 'Nom', 'attr'=>['placeholder'=>"votre nom"] ])
+            ->add('prenom',TextType::class,[ 'label_format' => 'Prénom', 'attr'=>['placeholder'=>"votre prenom"] ])
+            ->add('datedenaissance', BirthdayType::class, ['label_format' => 'Date de naissance', 
                 'placeholder' =>  [
-                     'month' => 'Month', 'day' => 'Day','year' => 'Year',
+                     'month' => 'Mois', 'day' => 'Jour','year' => 'Année',
                 ]
             ])
-            ->add('adresse',TextareaType::class, [
+            ->add('adresse',TextareaType::class, ['label_format' => 'Adresse', 
                 'attr' => ['class' => 'tinymce'],
             ])
-            ->add('ville', TextType::class)
-            ->add('codepostal')
-            ->add('numtel',NumberType::class,[ 'attr'=>['placeholder'=>"votre numero"] ])
-            ->add('numpermis',NumberType::class,[ 'attr'=>['placeholder'=>"votre numero permis"] ])
-            ->add('anneepermis', DateType::class)
+            ->add('ville', TextType::class, ['label_format' => 'Ville'])
+            ->add('codepostal',NumberType::class, ['label_format' => 'Code postal'])
+            ->add('numtel',NumberType::class,[ 'label_format' => 'Numéro de téléphone', 'attr'=>['placeholder'=>"votre numero"] ])
+            ->add('numpermis',NumberType::class,[ 'label_format' => 'Numéro de permis', 'attr'=>['placeholder'=>"votre numero permis"] ])
+            ->add('anneepermis', DateType::class ,['label_format' => 'Année de permis'])
            
         ;
     }
