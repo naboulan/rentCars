@@ -19,9 +19,9 @@
                                     </div>
                                 </div>
                                 <div class="userData ml-3">
-                                    <h2 class="d-block" style="font-size: 1.5rem; font-weight: bold"><a href="javascript:void(0);">jjj</a></h2>
-                                    <h6 class="d-block"><a href="javascript:void(0)">1,500</a> Video Uploads</h6>
-                                    <h6 class="d-block"><a href="javascript:void(0)">300</a> Blog Posts</h6>
+
+                                <h1 class="d-block" style="font-size: 1.5rem; font-weight: bold"><a href="javascript:void(0);">{{user.nom }} {{user.prenom }}</a></h2>
+                                   
                                 </div>
                                 <div class="ml-auto">
                                     <input type="button" class="btn btn-primary d-none" id="btnDiscard" value="Discard Changes" />
@@ -33,32 +33,34 @@
                             <div class="col-12">
                                 <ul class="nav nav-tabs mb-4" id="myTab" role="tablist">
                                     <li class="nav-item">
-                                        <a class="nav-link active" id="basicInfo-tab" data-toggle="tab" href="#basicInfo" role="tab" aria-controls="basicInfo" aria-selected="true">Basic Info</a>
+                                        <a class="nav-link active" id="basicInfo-tab" data-toggle="tab" href="#basicInfo" role="tab" aria-controls="basicInfo" aria-selected="true">Mes informations personnel</a>
                                     </li>
                                     <li class="nav-item">
-                                        <a class="nav-link" id="connectedServices-tab" data-toggle="tab" href="#connectedServices" role="tab" aria-controls="connectedServices" aria-selected="false">Connected Services</a>
+                                        <a class="nav-link" id="connectedServices-tab" data-toggle="tab" href="#connectedServices" role="tab" aria-controls="connectedServices" aria-selected="false">Mes voitures</a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a class="nav-link" id="mesLocation-tab" data-toggle="tab" href="#mesLocation" role="tab" aria-controls="connectedServices" aria-selected="false">Mes location</a>
                                     </li>
                                 </ul>
                                 <div class="tab-content ml-1" id="myTabContent">
                                     <div class="tab-pane fade show active" id="basicInfo" role="tabpanel" aria-labelledby="basicInfo-tab">
-                                        
-<h1> {{user.nom}}</h1>
+                                      
                                         <div class="row">
                                             <div class="col-sm-3 col-md-2 col-5">
-                                                <label style="font-weight:bold;">Full Name</label>
+                                                <label style="font-weight:bold;">Nom</label>
                                             </div>
                                             <div class="col-md-8 col-6">
-                                                Jamshaid Kamran
+                                               {{user.nom}}
                                             </div>
                                         </div>
                                         <hr />
 
                                         <div class="row">
                                             <div class="col-sm-3 col-md-2 col-5">
-                                                <label style="font-weight:bold;">Birth Date</label>
+                                                <label style="font-weight:bold;">Prenom</label>
                                             </div>
                                             <div class="col-md-8 col-6">
-                                                March 22, 1994.
+                                                {{user.prenom}}
                                             </div>
                                         </div>
                                         <hr />
@@ -66,35 +68,57 @@
                                         
                                         <div class="row">
                                             <div class="col-sm-3 col-md-2 col-5">
-                                                <label style="font-weight:bold;">Something</label>
+                                                <label style="font-weight:bold;">Date de naissance</label>
                                             </div>
                                             <div class="col-md-8 col-6">
-                                                Something
+                                               {{user.datedenaissance|date('Y-m-d')}}
                                             </div>
                                         </div>
                                         <hr />
                                         <div class="row">
                                             <div class="col-sm-3 col-md-2 col-5">
-                                                <label style="font-weight:bold;">Something</label>
+                                                <label style="font-weight:bold;">Adresse</label>
                                             </div>
                                             <div class="col-md-8 col-6">
-                                                Something
+                                                {{user.adresse}}
                                             </div>
                                         </div>
                                         <hr />
                                         <div class="row">
                                             <div class="col-sm-3 col-md-2 col-5">
-                                                <label style="font-weight:bold;">Something</label>
+                                                <label style="font-weight:bold;">Ville</label>
                                             </div>
                                             <div class="col-md-8 col-6">
-                                                Something
+                                                {{user.ville}}
                                             </div>
                                         </div>
                                         <hr />
-
+                                         <div class="row">
+                                            <div class="col-sm-3 col-md-2 col-5">
+                                                <label style="font-weight:bold;">Numero de permis</label>
+                                            </div>
+                                            <div class="col-md-8 col-6">
+                                               {{user.numpermis}}
+                                            </div>
+                                        </div>
+                                        <hr />  
+                                        <div class="row">
+                                            <div class="col-sm-3 col-md-2 col-5">
+                                                <label style="font-weight:bold;">Numero de Tel</label>
+                                            </div>
+                                            <div class="col-md-8 col-6">
+                                               {{user.numtel}}
+                                            </div>
+                                        </div>
+                                        <hr />    
+                                              <button type="button" class="btn btn-primary" id="modifier">Modifier mes info</button>               
                                     </div>
                                     <div class="tab-pane fade" id="connectedServices" role="tabpanel" aria-labelledby="ConnectedServices-tab">
-                                        Facebook, Google, Twitter Account that are connected to this account
+                                        mes voitures
+                                        
+                                    </div>
+                                    <div class="tab-pane fade" id="mesLocation" role="tabpanel" aria-labelledby="mesLocation-tab">
+                                        mes location
                                     </div>
                                 </div>
                             </div>

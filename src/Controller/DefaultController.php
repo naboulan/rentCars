@@ -100,8 +100,9 @@ class DefaultController extends AbstractController
      */
     public function profil(Request $request, $id)
     {
-        
+       
         $user = $this->getDoctrine()->getRepository(User::class)->find($id);
+        
     return $this->render('profil.html.twig',['user'=>$user,]);
        
     }
