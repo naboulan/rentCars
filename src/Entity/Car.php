@@ -66,7 +66,7 @@ class Car
 
 
     /**
-     * @ORM\OneToMany(targetEntity="App\Entity\Car", mappedBy="car")
+     * @ORM\OneToMany(targetEntity="App\Entity\Commentaire", mappedBy="car")
      */
     private $commentaire;
    /**
@@ -75,7 +75,7 @@ class Car
     private $locations;
 
     /**
-     * @ORM\ManyToOne(targetEntity="App\Entity\User", inversedBy="rcu")
+     * @ORM\ManyToOne(targetEntity="App\Entity\User", inversedBy="cars")
      */
     private $user;
 

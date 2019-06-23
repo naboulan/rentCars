@@ -1,13 +1,13 @@
-<!DOCTYPE html>
+{% extends 'base.html.twig' %}
 
-<title>Edit User</title>
+{% block title %}Modifier le profile{% endblock %}
 
 {% block body %}
-    <h1>Edit User</h1>
+    <h1>Editer mon compte</h1>
 
     {{ include('user/_form.html.twig', {'button_label': 'Update'}) }}
 
-    <a href="{{ path('user_index') }}">back to list</a>
+    <a href="{{ path('user_index') }}">Revenir à la liste</a>
 
     {{ include('user/_delete_form.html.twig') }}
 {% endblock %}

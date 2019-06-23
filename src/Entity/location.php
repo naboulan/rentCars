@@ -40,6 +40,14 @@ class location
      * @ORM\JoinColumn(nullable=true)
      */
     private $Etatdl;
+
+
+    /**
+     * @ORM\Column(type="boolean")
+     */
+    private $validateProp;
+
+
     public function getdatedebut()
     {
         return $this->datedebut;
@@ -95,6 +103,18 @@ class location
     public function setEtatdl(self $Etatdl): self
     {
         $this->Etatdl = $Etatdl;
+
+        return $this;
+    }
+
+    public function getValidateProp()
+    {
+        return $this->validateProp;
+    }
+
+    public function setValidateProp(Bool $validateProp)
+    {
+        $this->validateProp = $validateProp;
 
         return $this;
     }

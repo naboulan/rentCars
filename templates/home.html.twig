@@ -1,6 +1,6 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Home page{% endblock %}
+{% block title %}Accueil{% endblock %}
 
 {% block body %} 
 <div>
@@ -19,17 +19,17 @@
                                     </div>
                                     <!--end of col-->
                                     <div class="col-auto">
-                                        <button type="submit" class="btn btn-lg btn-success" role="button">Search</button>
+                                        <button type="submit" class="btn btn-lg btn-success" role="button">Rechercher</button>
                                     </div>
                                     <!--end of col-->
                                 </div>
                                <div class="row">
                                     <div class="col-md-6">
-                                        <h3>Date  Debut</h3>
+                                        <label>Date début</label>
                                         <input type="date" name="dated" id="debut" width="270">
                                     </div>
                                     <div class="col-md-6">
-                                        <h3>Date  Fin</h3>
+                                        <label>Date fin</label>
                                         <input type="date" name="datef" id="fin">
                                     </div>
                                 </div>
@@ -41,7 +41,7 @@
 </div>
 
 <div class="container" mt>
-       <h2> derniere voiture</h2>
+       <h2> Dernières voitures</h2>
        <div class="row flex">
         {% for car in cars %}
             <div class="col-3">

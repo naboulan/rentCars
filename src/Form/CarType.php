@@ -9,25 +9,26 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
 use Symfony\Component\Form\Extension\Core\Type\DateType;
+use Symfony\Component\Form\Extension\Core\Type\TextType;
 
 class CarType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('matricule')
-            ->add('marque')
-            ->add('model')
-            ->add('category', ChoiceType::class, [
+            ->add('matricule',TextType::class,[ 'label_format' => 'Matricule', 'attr'=>['placeholder'=>"numéro du matricule"] ])
+            ->add('marque',TextType::class,[ 'label_format' => 'Marque', 'attr'=>['placeholder'=>"marque de la voiture"] ])
+            ->add('model',TextType::class,[ 'label_format' => 'Modèle', 'attr'=>['placeholder'=>"modèle de la voiture"] ])
+            ->add('category', ChoiceType::class, ['label_format' => 'Catégorie',
                 'choices' => ['Mariage' => 'mariage', 'Citadine' => 'citadine'],
             ])
-            ->add('carburant')
-            ->add('year')
-            ->add('price')
-            ->add('caution')
+            ->add('carburant',TextType::class,[ 'label_format' => 'Carburant', 'attr'=>['placeholder'=>"essence ou gazoil"] ])
+            ->add('year',TextType::class,[ 'label_format' => 'Année', 'attr'=>['placeholder'=>"année de mise en fonction de la voiture"] ])
+            ->add('price',TextType::class,[ 'label_format' => 'Prix', 'attr'=>['placeholder'=>"prix de la location par jour"] ])
+            ->add('caution',TextType::class,[ 'label_format' => 'Caution', 'attr'=>['placeholder'=>"caution"] ])
             ->add('boitAVitesse', CheckboxType::class, [
                 'label'    => 'auto',
-                'required' => false,
+                'required' => false,'label_format' => 'Boite à vitesse',
                 
             ])
             
