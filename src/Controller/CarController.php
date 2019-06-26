@@ -9,7 +9,8 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
-
+use App\Entity\Commentaire;
+use App\Form\CommentType;
 /**
  * @Route("/car")
  */
@@ -112,16 +113,30 @@ class CarController extends AbstractController
     /**
      * @Route("/detail/{id}", name="car_detail", methods={"GET","POST"})
      */
-    public function detail( $id) 
+    public function detail(Request $request, $id):Response
     {
         $user = null;
         if ($this->getUser()) {
             $user = $this->getUser();
         }
+        $commentaire = new Commentaire();
+        $form = $this->createForm(CommentType::class,$commentaire);
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $entityManager = $this->getDoctrine()->getManager();
+            $commentaire->setCar($car); 
+            $entityManager->persist($commentaire);
+            $entityManager->flush();
+
+            return $this->redirectToRoute('car_detail', [
+                'id' => $car->getId(),
+            ]);
+        }
        $cars = $this->getDoctrine()->getRepository(Car::class);
          $repo =$cars->find($id);
         return $this->render('car/detail.html.twig',[
-            'car'=> $repo, 'user' => $user
+            'car'=> $repo, 'user' => $user,'comment'=>$form->createView()
             
         ]);
     }

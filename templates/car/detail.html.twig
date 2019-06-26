@@ -2,90 +2,116 @@
 {% block style %} 
             <link rel="stylesheet" href="{{ asset('https://use.fontawesome.com/releases/v5.1.0/css/all.css') }}" integrity="sha384-lKuwvrZot6UHsBSfcMvOkWwlCMgc0TaWr+30HWe3a4ltaBwTZhyTEggF5tJv8tbt" crossorigin="anonymous">   
   {% endblock %}
+  {% block stylesheets %}
+{{ parent() }}
+<link href="{{ asset('css/detail.css') }}" rel="stylesheet" />
+{% endblock %}
 {% block body %}
-{% if error is defined %}
-<div class="alert alert-warning" role="alert">
-  {{ error}}
-</div>
-{% endif %}
-<div class="container pt-3 pb-5">
-<div class="page-sidebar">
-<div class="page-sidebar-content pt-3" itemscope="" itemtype="http://schema.org/Product">
+<div class="container mt-sm-5">
+<div class="card">
+	<div class="row">
+		<aside class="col-sm-5 border-right">
+<article class="gallery-wrap"> 
+<div class="img-big-wrap">
+  <div> <a href="#"><img src="https://s9.postimg.org/tupxkvfj3/image.jpg"></a></div>
+</div> <!-- slider-product.// -->
+<div class="img-small-wrap">
+  <div class="item-gallery"> <img src="https://s9.postimg.org/tupxkvfj3/image.jpg"> </div>
+  <div class="item-gallery"> <img src="https://s9.postimg.org/tupxkvfj3/image.jpg"> </div>
+  <div class="item-gallery"> <img src="https://s9.postimg.org/tupxkvfj3/image.jpg"> </div>
+  <div class="item-gallery"> <img src="https://s9.postimg.org/tupxkvfj3/image.jpg"> </div>
+</div> <!-- slider-nav.// -->
+</article> <!-- gallery-wrap .end// -->
+		</aside>
+		<aside class="col-sm-7">
+<article class="card-body p-5">
+	<h3 class="title mb-3">{{car.marque}} {{car.Model}}</h3>
 
-<h1 class="h1-2 entry-title entry-title--lg"><span class="first-word"> {{car.model}}Prix Seat</span> Ibiza URBAN 1.6 MPi 110 ch Automatique</h1>
-                         
-<div class="row price-details my-4">
-  <div class="d-none d-md-block col-md-4"><div class=" price-thumb">
-    <div class="img"><img src="..." alt="..." class="img-thumbnail"></div>
-    </div>
-  </div>
-</div>
-<div class="price-options mb-4" itemprop="description">      
-<div class="row price-table">      
-<div class="col-12">
-<div class="block-heading block-heading--line-around mt-5">
-	<h4 class="block-heading__title">
-		Moteur
-    </h4>
-</div>               
-</div>           
-<div class="col-12 col-sm-6 col-md-5"><div class="price-td-name mt-1">Energie</div></div>
-<div class="col-12 col-sm-6 col-md-7"><div class="price-td-value mt-1">
-Essence 
-</div></div>
-<div class="col-12 col-sm-6 col-md-5"><div class="price-td-name mt-1">Boite</div></div>
-<div class="col-12 col-sm-6 col-md-7"><div class="price-td-value mt-1">
-Automatique 
-</div></div>
-<div class="col-12 col-sm-6 col-md-5"><div class="price-td-name mt-1">Cylindrée</div></div>
-<div class="col-12 col-sm-6 col-md-7"><div class="price-td-value mt-1">
-1598 cc
-</div></div>
-<div class="col-12 col-sm-6 col-md-5"><div class="price-td-name mt-1">Nbr cylindres</div></div>
-<div class="col-12 col-sm-6 col-md-7"><div class="price-td-value mt-1">
-4 
-</div></div>
-<div class="col-12 col-sm-6 col-md-5"><div class="price-td-name mt-1">Type moteur</div></div>
-<div class="col-12 col-sm-6 col-md-7"><div class="price-td-value mt-1">
-en ligne 
-</div></div>
-<div class="col-12 col-sm-6 col-md-5"><div class="price-td-name mt-1">Puissance</div></div>
-<div class="col-12 col-sm-6 col-md-7"><div class="price-td-value mt-1">
-110 ch
-</div></div>
-<div class="col-12 col-sm-6 col-md-5"><div class="price-td-name mt-1">Puissance tr</div></div>
-<div class="col-12 col-sm-6 col-md-7"><div class="price-td-value mt-1">
-5800 
-</div></div>
-<div class="col-12 col-sm-6 col-md-5"><div class="price-td-name mt-1">Couple</div></div>
-<div class="col-12 col-sm-6 col-md-7"><div class="price-td-value mt-1">
-155  Nm  - 3800tr/min nm
-</div></div>
-<div class="col-12 col-sm-6 col-md-5"><div class="price-td-name mt-1">Reservoir</div></div>
-<div class="col-12 col-sm-6 col-md-7"><div class="price-td-value mt-1">
-55 l
-</div></div>
-<div class="col-12 col-sm-6 col-md-5"><div class="price-td-name mt-1">Vitesse max</div></div>
-<div class="col-12 col-sm-6 col-md-7"><div class="price-td-value mt-1">
-189 km/h
-</div></div>
-<div class="col-12 col-sm-6 col-md-5"><div class="price-td-name mt-1">Acceleration de 0 à 100</div></div>
-<div class="col-12 col-sm-6 col-md-7"><div class="price-td-value mt-1">
-10.5 s
-</div></div>
-<div class="col-12 col-sm-6 col-md-5"><div class="price-td-name mt-1">Consomation</div></div>
-<div class="col-12 col-sm-6 col-md-7"><div class="price-td-value mt-1">
-6.4 l/100km
-</div></div>
-<div class="col-12 col-sm-6 col-md-5"><div class="price-td-name mt-1">Soupapes</div></div>
-<div class="col-12 col-sm-6 col-md-7"><div class="price-td-value mt-1">
-16 
-</div></div>
-{%  if is_granted('ROLE_USER') %}
+<p class="price-detail-wrap"> 
+	<span class="price h3 text-warning"> 
+		<span class="currency">Prix pour la journée: </span><span class="num"> {{car.price}} DA</span>
+	</span> 
+	
+</p> <!-- price-detail-wrap .// -->
+<dl class="item-property">
+  <dt>Description</dt>
+  <dd><p>Here goes description consectetur adipisicing elit, sed do eiusmod
+tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
+quis nostrud exercitation ullamco </p></dd>
+</dl>
+<dl class="param param-feature">
+  <dt>Categorie</dt>
+  <dd>{{car.Category}}</dd>
+</dl>  <!-- item-property-hor .// -->
+<dl class="param param-feature">
+  <dt>boite a vitesse</dt>
+  <dd> {% if car.boitAVitesse == true %} 
+  Boite automatique
+  {% else %} boite manuel
+  {% endif %}
+  </dd>
+</dl>  <!-- item-property-hor .// -->
+<dl class="param param-feature">
+  <dt>Carburant</dt>
+  <dd>{{car.carburant}}</dd>
+</dl>  <!-- item-property-hor .// -->
+
+<hr>
+	<div class="row">
+		<div class="col-sm-5">
+			<dl class="param param-feature">
+         <dt>Annee</dt>
+              <dd>{{car.year}}</dd>
+         </dl>  <!-- item-property-hor .// -->
+		</div> <!-- col.// -->
+		<dl class="param param-feature">
+       <dt>Caution</dt>
+       <dd>{{car.caution}} DA</dd>
+    </dl>  <!-- item-property-hor .// -->
+		</div> <!-- col.// -->
+    {%  if is_granted('ROLE_USER') %}
 <a class="btn btn-primary" href="{{ path('request_rent', {'id': car.id}) }}"> Demande de location</a>
 {% else %} 
 <a class="btn btn-primary" href="#"> Demande de location</a>
 <p> Veuillez vous connecter</p>
 {% endif %}
-</div>  
+	</div> <!-- row.// -->
+	<hr>
+	
+</article> <!-- card-body.// -->
+		</aside> <!-- col.// -->
+    
+	</div> <!-- row.// -->
+</div> <!-- card.// -->
+
+
+</div>
+<!--container.//-->
+<section id="commentaires">
+  <h1> {{car.commentaire| length}} commentaire:</h1>
+  {% for comment in car.commentaire %}
+  <div class="comment">
+  <div class="row">
+  <div class="col-3">
+  {{user.nom | raw}} {{user.nom | raw}} (<small> {{ post.published_at|date("m/d/Y") }} </small>)
+  </div>
+  <div class="col">
+  {{comment.message | raw}}
+  </div>
+  </div>
+  </div>
+  {% endfor %}
+  {% if app.user %}
+  {{ form_start(comment) }}
+  {{ form_start(comment.message, {'attr':{'placeholder':"votre commentaire"}}) }}
+  <button type="submit" class="btn btn-success"> commentaire </button>
+  {{form_end(comment) }}
+  {% else %}
+   <h2> veuillez vous connecter pour pouvoir commenter </h2>
+  {% endif %}
+  </section>
+
+
+
+  
 {% endblock %}
