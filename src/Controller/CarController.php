@@ -115,6 +115,8 @@ class CarController extends AbstractController
      */
     public function detail(Request $request, $id):Response
     {
+       $car = $this->getDoctrine()->getRepository(Car::class)->find($id);
+
         $user = null;
         if ($this->getUser()) {
             $user = $this->getUser();
@@ -133,10 +135,8 @@ class CarController extends AbstractController
                 'id' => $car->getId(),
             ]);
         }
-       $cars = $this->getDoctrine()->getRepository(Car::class);
-         $repo =$cars->find($id);
         return $this->render('car/detail.html.twig',[
-            'car'=> $repo, 'user' => $user,'comment'=>$form->createView()
+            'car'=> $car, 'user' => $user,'comment'=>$form->createView()
             
         ]);
     }

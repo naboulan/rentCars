@@ -93,7 +93,7 @@ quis nostrud exercitation ullamco </p></dd>
   <div class="comment">
   <div class="row">
   <div class="col-3">
-  {{user.nom | raw}} {{user.nom | raw}} (<small> {{ post.published_at|date("m/d/Y") }} </small>)
+  {{user.nom | raw}} {{user.nom | raw}} (<small> {{ comment.publishedAt|date("m/d/Y") }} </small>)
   </div>
   <div class="col">
   {{comment.message | raw}}

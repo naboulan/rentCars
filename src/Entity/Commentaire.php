@@ -28,8 +28,11 @@ class Commentaire
      */
     private $note;
 
-   
-    
+    /**
+     * @ORM\Column(type="date", nullable=true)
+     */
+    private $publishedAt;
+
     /**
      * @ORM\ManyToOne(targetEntity="App\Entity\Car", inversedBy="commentaire")
      */
@@ -39,11 +42,6 @@ class Commentaire
      * @ORM\ManyToOne(targetEntity="App\Entity\User", inversedBy="commentaires")
      */
     private $User;
-
-    public function __construct()
-    {
-        $this->commentaires = new ArrayCollection();
-    }
 
     public function getId(): ?int
     {
@@ -62,6 +60,18 @@ class Commentaire
         return $this;
     }
 
+    public function getPublishedAt(): ?date
+    {
+        return $this->publishedAt;
+    }
+
+    public function setPublishedAt(?date $publishedAt): self
+    {
+        $this->publishedAt = $publishedAt;
+
+        return $this;
+    }
+
     public function getNote(): ?int
     {
         return $this->note;
@@ -74,37 +84,6 @@ class Commentaire
         return $this;
     }
 
-    /**
-     * @return Collection|Commentaire[]
-     */
-    public function getCommentaires(): Collection
-    {
-        return $this->commentaires;
-    }
-
-    public function addCommentaire(Commentaire $commentaire): self
-    {
-        if (!$this->commentaires->contains($commentaire)) {
-            $this->commentaires[] = $commentaire;
-            $commentaire->setUser($this);
-        }
-
-        return $this;
-    }
-
-    public function removeCommentaire(Commentaire $commentaire): self
-    {
-        if ($this->commentaires->contains($commentaire)) {
-            $this->commentaires->removeElement($commentaire);
-            // set the owning side to null (unless already changed)
-            if ($commentaire->getUser() === $this) {
-                $commentaire->setUser(null);
-            }
-        }
-
-        return $this;
-    }
-
     public function getUser(): ?User
     {
         return $this->User;
@@ -113,6 +92,18 @@ class Commentaire
     public function setUser(?User $User): self
     {
         $this->User = $User;
+
+        return $this;
+    }
+
+    public function getCar(): ?Car
+    {
+        return $this->car;
+    }
+
+    public function setCar(?Car $car): self
+    {
+        $this->car = $car;
 
         return $this;
     }
