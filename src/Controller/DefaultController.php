@@ -102,8 +102,24 @@ class DefaultController extends AbstractController
     {
        
         $user = $this->getDoctrine()->getRepository(User::class)->find($id);
+      
+        
         
     return $this->render('profil.html.twig',['user'=>$user,]);
+       
+    }
+    /**
+     * @Route("/test", name="test_profil")
+     */
+    public function test()
+    {
+       
+        $user = null;
+        if ($this->getUser()) {
+            $user = $this->getUser();
+        }
+        
+    return $this->render('test.html.twig');
        
     }
     
