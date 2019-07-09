@@ -380,6 +380,39 @@ class User implements UserInterface
 
 
 
+     /**
+     * @return Collection|self[]
+     */
+    public function getCars(): Collection
+    {
+        return $this->cars;
+    }
+
+    public function addCars(self $car): self
+    {
+        if (!$this->cars->contains($car)) {
+            $this->cars[] = $car;
+            $car->setUser($this);
+        }
+
+        return $this;
+    }
+
+    public function removeCars(self $car): self
+    {
+        if ($this->cars->contains($car)) {
+            $this->cars->removeElement($car);
+            // set the owning side to null (unless already changed)
+            if ($car->getUser() === $this) {
+                $car->setUser(null);
+            }
+        }
+
+        return $this;
+    }
+
+
+
 
 
 }

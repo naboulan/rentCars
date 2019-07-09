@@ -114,7 +114,11 @@
                                               <button type="button" class="btn btn-primary" id="modifier">Modifier mes info</button>               
                                     </div>
                                     <div class="tab-pane fade" id="connectedServices" role="tabpanel" aria-labelledby="ConnectedServices-tab">
-                                        mes voitures
+                                        <ul>
+                                        {% for car in user.cars %}
+                                         <li> {{car.marque}}</li>
+                                        {% endfor %}
+                                        </ul>
                                         
                                     </div>
                                     <div class="tab-pane fade" id="mesLocation" role="tabpanel" aria-labelledby="mesLocation-tab">
