@@ -11,18 +11,14 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use App\Entity\User;
 use App\Repository\UserRepository;
+use App\Entity\location;
+use App\Repository\LocationRepository;
 use Symfony\Component\HttpFoundation\Session\SessionInterface;
 use Doctrine\ORM\EntityManagerInterface;
 
 class DefaultController extends AbstractController
 {
-    
-     /**
-     * @var EntityManagerInterface
-     */
-    private $entityManager;
-
-    private $session;
+   
 
     public function __construct(EntityManagerInterface $entityManager, SessionInterface $session)
     {
@@ -101,11 +97,27 @@ class DefaultController extends AbstractController
     public function profil(Request $request, $id)
     {
        
-        $user = $this->getDoctrine()->getRepository(User::class)->find($id);
-      
+       $utilisateur=$this->getUser();
+
+       $locationsInporegress = $this->getDoctrine()->getRepository(location::class)
+       ->findByLocationInProgress($utilisateur);
+
+       $locationsValid = $this->getDoctrine()->getRepository(location::class)
+       ->findByLocationValid( $utilisateur);
+
+       $locationsHistory = $this->getDoctrine()->getRepository(location::class)
+       ->findByLocationHistory( $utilisateur);
+       
+       $locations = $this->getDoctrine()->getRepository(location::class)
+       ->findBy( ['User'=>$utilisateur], ['id' => 'DESC' ] );
         
-        
-    return $this->render('profil.html.twig',['user'=>$user,]);
+    return $this->render('profil.html.twig',[
+        'user'=>$utilisateur,
+        'locationsInProgress' => $locationsInporegress,
+        'locationsValid' => $locationsValid,
+        'locationsHistory' => $locationsHistory,
+         'locations'=> $locations ,
+        ]);
        
     }
     /**
@@ -114,10 +126,8 @@ class DefaultController extends AbstractController
     public function test()
     {
        
-        $user = null;
-        if ($this->getUser()) {
-            $user = $this->getUser();
-        }
+        
+        
         
     return $this->render('test.html.twig');
        

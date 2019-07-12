@@ -1,0 +1,119 @@
+En cours 
+<table>
+  <thead>
+    <tr>
+      <th>Numero de location</th>
+      <th>Date début</th>
+      <th>Date fin</th>
+      <th>Nom loueur</th>
+      <th>Voiture</th>
+    </tr>
+  </thead>
+  <tbody>
+  {% for location in locationsInProgress %}
+    <tr>
+      <td>{{ location.id }}</td>
+      <td>{{ location.datedebut }}</td>
+      <td><p> Recuperer la voiture le </p>{{ location.datefin }}</td>
+      <td>{{ location.User.name }}  {{ location.User.prenom }}</td>
+      <td><a href="{{ path('car_detail', {id: location.Car.id})}}"> {{ location.Car.marque }}  {{ location.Car.model }} </a></td>      
+    </tr>
+{% endfor %}
+   
+  </tbody>
+</table>
+
+location en attennte 
+<table>
+  <thead>
+    <tr>
+      <th>Numero de location</th>
+      <th>Date début</th>
+      <th>Date fin</th>
+      <th>Nom loueur</th>
+      <th>Voiture</th>
+    </tr>
+  </thead>
+  <tbody>
+  {% for location in  locationsValid %}
+    <tr>
+      <td>{{ location.id }}</td>
+      <td><p> louer la voiture le </p>{{ location.datedebut }}</td>
+      <td>{{ location.datefin }}</td>
+      <td>{{ location.User.name }} {{ location.User.prenom }}</td>
+      <td><a href="{{ path('car_detail', {id: location.Car.id})}}"> {{ location.Car.marque }}  {{ location.Car.model }} </a></td>      
+    </tr>
+{% endfor %}
+   
+  </tbody>
+</table>
+
+Toutes mes locations 
+<table>
+  <thead>
+    <tr>
+      <th>Numero de location</th>
+      <th>Date début</th>
+      <th>Date fin</th>
+      <th>Nom loueur</th>
+      <th>Email loueur</th>
+      <th>voiture</th>
+      <th>Etat De Voiture</th>
+    </tr>
+  </thead>
+  <tbody>
+  {% for location in locationsHistory %}
+    <tr>
+      <td>{{ location.id }}</td>
+      <td>{{ location.datedebut }}</td>
+      <td>{{ location.datefin }}</td>
+      <td>{{ location.User.name }}  {{ location.User.prenom }}</td>
+      <td>{{ location.User.email }}</td>
+      <td><a href="{{ path('car_detail', {id: location.Car.id})}}"> {{ location.Car.marque }}</a></td>      
+      <td> 
+       {% if location.validateProp == 0 %}
+                <p>Location annuler</p>
+       {% elseif location.validateProp == 1 %} <p>Location accepter</p>
+       {% else %} <p>Location en attente de reponse (verifier votre email)</p>
+{% endif %} </td>
+    </tr>
+{% endfor %}
+   
+  </tbody>
+</table>
+
+demande de location:
+<table>
+  <thead>
+    <tr>
+      <th>Numero de location</th>
+      <th>Date début</th>
+      <th>Date fin</th>
+      <th>Nom proprietaire</th>
+      <th>Email Proprietaire</th>
+      <th>voiture</th>
+      <th>Etat De Location</th>
+    </tr>
+  </thead>
+  <tbody>
+  {% for location in locations %}
+    <tr>
+      <td>{{ location.id }}</td>
+      <td>{{ location.datedebut }}</td>
+      <td>{{ location.datefin }}</td>
+      <td>{{ location.User.Car.user.nom }}  {{ location.User.prenom }}</td>
+      <td>{{ location.User.Car.user.email }}</td>
+      <td><a href="{{ path('car_detail', {id: location.Car.id})}}"> {{ location.Car.marque }}</a></td>      
+      <td> 
+       {% if location.validateProp == 0 %}
+                <p>Location annuler</p>
+       {% elseif location.validateProp == 1 %} <p>Location accepter</p>
+       {% else %} <p>Location en attente de reponse </p>
+{% endif %} </td>
+    </tr>
+{% endfor %}
+   
+  </tbody>
+</table>
+
+

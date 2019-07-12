@@ -6,7 +6,7 @@ use App\Entity\Car;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * @ORM\Entity(repositoryClass="App\Repository\locationRepository")
+ * @ORM\Entity(repositoryClass="App\Repository\LocationRepository")
  */
 class location
 {
@@ -47,6 +47,10 @@ class location
      */
     private $validateProp;
 
+    public function getId()
+    {
+        return $this->id;
+    }
 
     public function getdatedebut()
     {
@@ -76,31 +80,31 @@ class location
         return $this->User;
     }
 
-    public function setUser(?User $User): self
+    public function setUser(?User $User)
     {
         $this->User = $User;
 
         return $this;
     }
 
-    public function getCar(): ?self
+    public function getCar()
     {
         return $this->Car;
     }
 
-    public function setCar(Car $Car): self
+    public function setCar(Car $Car)
     {
         $this->Car = $Car;
 
         return $this;
     }
 
-    public function getEtatdl(): ?self
+    public function getEtatdl()
     {
         return $this->Etatdl;
     }
 
-    public function setEtatdl(self $Etatdl): self
+    public function setEtatdl(self $Etatdl)
     {
         $this->Etatdl = $Etatdl;
 

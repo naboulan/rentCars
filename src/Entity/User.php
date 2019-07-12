@@ -35,7 +35,6 @@ class User implements UserInterface
         $this->cars = new ArrayCollection();
         $this->locations = new ArrayCollection();
         $this->Messagerie = new ArrayCollection();
-        $this->Car = new ArrayCollection();
        $this->isActive = true;
     }
     /**
@@ -108,10 +107,6 @@ class User implements UserInterface
      */
     private $Messagerie;
 
-    /**
-     * @ORM\OneToMany(targetEntity="App\Entity\User", mappedBy="user")
-     */
-    private $Car;
 
     /**
      * @ORM\Column(type="boolean")
@@ -347,39 +342,7 @@ class User implements UserInterface
         return $this;
     }
 
-    /**
-     * @return Collection|self[]
-     */
-    public function getCar(): Collection
-    {
-        return $this->Car;
-    }
-
-    public function addCar(self $car): self
-    {
-        if (!$this->Car->contains($car)) {
-            $this->Car[] = $car;
-            $car->setUser($this);
-        }
-
-        return $this;
-    }
-
-    public function removeCar(self $car): self
-    {
-        if ($this->Car->contains($car)) {
-            $this->Car->removeElement($car);
-            // set the owning side to null (unless already changed)
-            if ($car->getUser() === $this) {
-                $car->setUser(null);
-            }
-        }
-
-        return $this;
-    }
-
-
-
+  
      /**
      * @return Collection|self[]
      */
@@ -412,7 +375,10 @@ class User implements UserInterface
     }
 
 
-
+    public function getId()
+    {
+        return $this->id;
+    }
 
 
 }

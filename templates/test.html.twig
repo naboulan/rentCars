@@ -3,6 +3,9 @@
     {{ parent() }}
       
 {% endblock %}
+          {% block sidebar %}
+{% endblock %}
+
 {% block stylesheets %}
 {{ parent() }}
 <link href="{{ asset('css/test.css') }}" rel="stylesheet" />
