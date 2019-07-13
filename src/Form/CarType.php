@@ -10,6 +10,7 @@ use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
 use Symfony\Component\Form\Extension\Core\Type\DateType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
+use Symfony\Component\Form\Extension\Core\Type\FileType;
 
 class CarType extends AbstractType
 {
@@ -22,12 +23,13 @@ class CarType extends AbstractType
             ->add('category', ChoiceType::class, ['label_format' => 'Catégorie',
                 'choices' => ['Mariage' => 'mariage', 'Citadine' => 'citadine'],
             ])
+            ->add('imageFile', FileType::class,[ 'required'=>false,'attr'=>['placeholder'=>"ajouter une image"]])
             ->add('carburant',TextType::class,[ 'label_format' => 'Carburant', 'attr'=>['placeholder'=>"essence ou gazoil"] ])
             ->add('year',TextType::class,[ 'label_format' => 'Année', 'attr'=>['placeholder'=>"année de mise en fonction de la voiture"] ])
             ->add('price',TextType::class,[ 'label_format' => 'Prix', 'attr'=>['placeholder'=>"prix de la location par jour"] ])
             ->add('caution',TextType::class,[ 'label_format' => 'Caution', 'attr'=>['placeholder'=>"caution"] ])
             ->add('boitAVitesse', CheckboxType::class, [
-                'label'    => 'auto',
+                'label'    => 'boite a vitesse auto',
                 'required' => false,'label_format' => 'Boite à vitesse',
                 
             ])

@@ -7,14 +7,16 @@
 
 
        
-       <div class="container">
+       <div class="container mt-sm-5">
        <h2> Resultat de votre recherche </h2>
        <div class="row flex">
         {% for car in cars %}
             <div class="col-3">
               <div class="card">
+              {% if car.filename %} 
+               <div class="img"><img src="{{ vich_uploader_asset(car,'imageFile')}}" alt="card-img-top" style="width: 100% ; height:auto;"></div>
+                  {% endif %}
                   <div class="card-body">
-                   <div class="img"><img src="..." alt="..." class="img-thumbnail"></div>
                    <h5 class="card-title">
                      <a href="{{ path('car_detail', {'id':car.id}) }}"> {{car.marque}}  {{car.model}}</a>
                      </h5>
@@ -30,7 +32,11 @@
             </tr>
         {% endfor %}
      </div>
-     </div>   
-    
+     </div>    <br>
+     <br>
+  
+    <div class="navigation text-center">
+    {{ knp_pagination_render(cars) }}
+</div>
 
 {% endblock %}

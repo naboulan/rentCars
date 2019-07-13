@@ -6,9 +6,11 @@ use App\Entity\location as Location;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use Vich\UploaderBundle\Mapping\Annotation as Vich;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\CarRepository")
+ * @Vich\Uploadable()
  */
 class Car
 {
@@ -18,6 +20,21 @@ class Car
      * @ORM\Column(type="integer")
      */
     private $id;
+
+ /**
+     * @ORM\Column(type="string", length=255)
+     *
+     * @var string|null
+     */
+    private $filename;
+
+ /**
+     *
+     * @Vich\UploadableField(mapping="cars_image", fileNameProperty="filename", size="imageSize")
+     *
+     * @var File|null
+     */
+    private $imageFile;
 
     /**
      * @ORM\Column(type="integer")
@@ -79,6 +96,11 @@ class Car
      */
     private $user;
 
+    /**
+     * @ORM\Column(type="datetime")
+     */
+    private $updated_at;
+
     public function __construct()
     {
         $this->commentaire = new ArrayCollection();
@@ -86,7 +108,7 @@ class Car
     }
 
 
-    
+
 
     public function getId(): ?int
     {
@@ -275,7 +297,7 @@ class Car
         return $this;
     }
 
-   
+
 
     public function getUser(): ?User
     {
@@ -288,4 +310,41 @@ class Car
 
         return $this;
     }
+    
+    public function getImageFile()
+    {
+        return $this->imageFile;
+    }
+    public function setImageFile(?File $imageFile): property
+    {
+        $this->imageFile = $imageFile;
+        if ($this->imageFile instanceof UploadedFile) {
+            $this->updated_at = new \DateTime('now');
+        }
+        return $this;
+    }
+
+    public function setFilename(?string $filename): void
+    {
+        $this->filename = $filename;
+        
+    }
+
+    public function getFilename(): ?string
+    {
+        return $this->filename;
+    }
+
+    public function getUpdatedAt(): ?\DateTimeInterface
+    {
+        return $this->updated_at;
+    }
+
+    public function setUpdatedAt(\DateTimeInterface $updated_at): self
+    {
+        $this->updated_at = $updated_at;
+
+        return $this;
+    }
+
 }

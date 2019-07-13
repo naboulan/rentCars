@@ -15,15 +15,20 @@ use App\Entity\location;
 use App\Repository\LocationRepository;
 use Symfony\Component\HttpFoundation\Session\SessionInterface;
 use Doctrine\ORM\EntityManagerInterface;
-
+use Knp\Component\Pager\Event\Subscriber\Paginate\PaginationSubscriber;
+use Knp\Component\Pager\Event\Subscriber\Sortable\SortableSubscriber;
+use Knp\Component\Pager\Event;
+use Knp\Component\Pager\Pagination\PaginationInterface;
+use Knp\Component\Pager\PaginatorInterface;
 class DefaultController extends AbstractController
 {
    
 
-    public function __construct(EntityManagerInterface $entityManager, SessionInterface $session)
+    public function __construct(EntityManagerInterface $entityManager, SessionInterface $session,PaginatorInterface $paginator)
     {
         $this->entityManager = $entityManager;
         $this->session = $session;
+        $this->paginator = $paginator;
     }
     /**
      * @Route("/", name="home")
@@ -51,14 +56,15 @@ class DefaultController extends AbstractController
    
     
      /**
-     * @Route("/search", name="search", methods={"POST"})
+     * @Route("/search", name="search", methods={ "GET","POST"})
      */
-    public function search(Request $request)
+    public function search(Request $request )
     {
         $user = null;
         if ($this->getUser()) {
             $user = $this->getUser();
         }
+        
         $filters = [ 'city' => $request->request->get('city'),
                      'dated' => $request->request->get('dated'),
                      'datef' => $request->request->get('datef')
@@ -86,7 +92,13 @@ class DefaultController extends AbstractController
                 }
             }
         }
-        return $this->render('recherche.html.twig', array( 'cars' => $results, 'user' => $user)); 
+        //$paginator= $this -> get('knp_paginator');
+        $resultat=$this->paginator-> paginate(
+            $results,
+            $request->query->getInt('page', 1),
+            $request->query->getInt('limit', 12)
+        );
+        return $this->render('recherche.html.twig', array( 'cars' => $resultat, 'user' => $user)); 
     }
      
  

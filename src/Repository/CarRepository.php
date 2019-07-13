@@ -78,7 +78,6 @@ class CarRepository extends ServiceEntityRepository
     
     
     } 
-
     
  }
 
