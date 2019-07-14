@@ -55,8 +55,7 @@ class CarRepository extends ServiceEntityRepository
     { 
        
         $query= $this->createQueryBuilder('c')
-                    ->join('c.user', 'u', 'WITH','c.user = u.id')
-                    ->leftJoin('c.locations', 'l');
+                    ->join('c.user', 'u', 'WITH','c.user = u.id');
 
         if ($filters['city']) {
             $query->andWhere( 'u.ville like :city')

@@ -5,7 +5,7 @@
     <link href="{{ asset('css/confirm.css') }}" rel="stylesheet" />
 {% endblock %}
 
-{% block title %}Location{% endblock %}
+{% block title %}Confirmation Location{% endblock %}
 
 {% block body %}
 <section class="py-5">
@@ -27,22 +27,35 @@
                 <!-- CUSTOM BLOCKQUOTE -->
                 <blockquote class="blockquote blockquote-custom bg-white p-5 shadow rounded">
                     <div class="blockquote-custom-icon bg-info shadow-sm"><i class="fa fa-quote-left text-white"></i></div>
-                    <p class="mb-0 mt-2 font-italic">"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod  tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo <a href="#" class="text-info">@consequat</a>."</p>
+                    <p class="mb-0 mt-2 font-italic">"Merci de confirmer ou non la demande de location"</p> <br>
+                    <h5>Voici les informations</h5>
+                    <hr>
+                    <div class="lib-row lib-header">
+                        {{car.model}} {{car.marque}}
+                        <div class="lib-header-seperator"></div>
+                    </div>
+                    <div class="lib-row lib-desc">
+                    Type:{{car.category}} <br>
+                        Date debut:{{location.datedebut|date('d/m/Y')}}     <br> 
+                         Date fin:{{location.datefin|date('d/m/Y')}}
+                        <br>
+                        pour une durée de {{diff}} jours  votre solde sera <br>
+                        PRIX:{{car.price * diff}}
+                    
+                    </div>
+
+                     <div class="lib-row lib-header">
+                        Demandeur est <a href='{{ path('home_profil', {id: location.user.id})}}' target='_blank'>{{location.user.nom}} {{location.user.prenom}}</a>
+                        <div class="lib-header-seperator"></div>
+                    </div>
                     <footer class="blockquote-footer pt-4 mt-4 border-top">
                     <div class="row justify-content-around">
-                    <div class="col-4">
-                    <a class="btn btn-large btn-primary" data-toggle="confirmation" data-title="Open Google?"
-                href="#" target="_blank">Confirmation</a>
-                    </div>
-                    <div class="col-4">
-                    <a class="btn btn-large btn-primary" data-toggle="confirmation" data-title="Open Google?"
-                href="#" target="_blank">Annulation</a>
-                    </div>
-                </div>
-
-                {{ form_start(form) }}
-                <button class="btn btn-success">Enregistrer</button>
-                {{form_end(form)}}
+                    <div class="col-12">
+                     {{ form_start(form) }}
+                    {{ form_row(form)}}
+                    <button class="btn btn-success">Enregistrer</button>
+                    {{form_end(form)}}
+                </div>               
                     
                     </footer>
                 </blockquote><!-- END -->

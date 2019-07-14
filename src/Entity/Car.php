@@ -97,7 +97,7 @@ class Car
     private $user;
 
     /**
-     * @ORM\Column(type="datetime")
+     * @ORM\Column(type="date")
      */
     private $updated_at;
 
@@ -106,8 +106,6 @@ class Car
         $this->commentaire = new ArrayCollection();
         $this->locations = new ArrayCollection();
     }
-
-
 
 
     public function getId(): ?int
@@ -315,14 +313,14 @@ class Car
     {
         return $this->imageFile;
     }
-    public function setImageFile(?File $imageFile): property
-    {
-        $this->imageFile = $imageFile;
-        if ($this->imageFile instanceof UploadedFile) {
-            $this->updated_at = new \DateTime('now');
-        }
-        return $this;
-    }
+    // public function setImageFile(?File $imageFile): property
+    // {
+    //     $this->imageFile = $imageFile;
+    //     if ($this->imageFile instanceof UploadedFile) {
+    //         $this->updated_at = new \DateTime('now');
+    //     }
+    //     return $this;
+    // }
 
     public function setFilename(?string $filename): void
     {
@@ -335,12 +333,12 @@ class Car
         return $this->filename;
     }
 
-    public function getUpdatedAt(): ?\DateTimeInterface
+    public function getUpdatedAt()
     {
         return $this->updated_at;
     }
 
-    public function setUpdatedAt(\DateTimeInterface $updated_at): self
+    public function setUpdatedAt(\DateTime $updated_at)
     {
         $this->updated_at = $updated_at;
 

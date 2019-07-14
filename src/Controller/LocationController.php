@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use App\Entity\Car;
+use App\Form\ValidationLocationType;
 use App\Entity\location as Location;
 use App\Repository\CarRepository;
 use Symfony\Component\HttpFoundation\Session\SessionInterface;
@@ -51,6 +52,7 @@ class LocationController extends AbstractController
     
 
     }  
+
     /**
      * @Route("/validation/rent/{id}", name="validation_rent")
      */
@@ -92,6 +94,7 @@ class LocationController extends AbstractController
 
     }
 
+    
     public function sendRequestLocationToProps($mailer, $car, $location, $proprietaire)
     {
 
@@ -101,6 +104,63 @@ class LocationController extends AbstractController
         ->setBody(
             $this->renderView(
                 'emails/request_location.html.twig',
+                ['car' => $car, 'location' => $location]
+            ),
+            'text/html'
+        );
+
+        $mailer->send($message);
+    }
+
+
+    /**
+     * @Route("/confirmation/rent/{id}", name="confirmation_rent")
+     */
+    public function confirmationRent(Request $request, $id, \Swift_Mailer $mailer)
+    {
+        $this->denyAccessUnlessGranted('ROLE_USER');
+        $user = null;
+        if ($this->getUser()) {
+            $user = $this->getUser();
+        }
+
+        $location = $this->getDoctrine()->getRepository(Location::class)->find($id);
+        $proprietaire = $location->getCar()->getUser();   
+        $duree = $location->getdatefin()->diff($location->getdatedebut())->days;   
+        $form = $this->createForm(ValidationLocationType::class, $location);
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $this->getDoctrine()->getManager()->flush();
+            
+
+
+            $this->sendResponseLocationToLoueur($mailer, $location->getCar(), $location);
+          
+            return $this->redirectToRoute('home');
+        }
+
+      
+          
+       return $this->render('location/request_rent_confirmation.html.twig',[
+           'car'=> $location->getCar(), 'proprietaire' => $proprietaire, 'user' => $user, 
+           'location' => $location,
+           'diff' => $duree,
+           'form' => $form->createView(),]);
+        
+
+    }
+
+
+    public function sendResponseLocationToLoueur($mailer, $car, $location)
+    {
+
+        $message = (new \Swift_Message('Response de location'))
+        ->setFrom('rentandgo@homtail.fr')
+        ->setTo($location->getUser()->getemail())
+        ->setBody(
+            $this->renderView(
+                'emails/response_location.html.twig',
                 ['car' => $car, 'location' => $location]
             ),
             'text/html'

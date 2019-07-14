@@ -98,15 +98,21 @@ Licensed under MIT
 		<table width="90%" border="0" cellspacing="0" cellpadding="0">
 			<tr><td>
 			<p>
-			    Bonjour {{ car.user.nom}},<br/>
-			    Vous avez reçu une demande de location pour votre véhicule  matricule: {{ car.matricule}}<br/></p>
+			    Bonjour {{ location.user.nom}},<br/>
+			    Vous avez reçu une  réponse à votre demande de location pour le véhicule  matricule: {{ car.matricule}}<br/></p>
 				<p>
-			    Voici les informations du demandeur:<br/>
+				Rappel de la location :<br/>
 			    Date début: {{location.datedebut | date('d/m/Y')}}<br/>
 			    Date fin:{{location.datefin | date('d/m/Y')}}<br/>
 				</p>
 				<p>
-                Veuillez au plus vite répondre à cette demande
+                Voici la réponse : {% if location.validateProp == 0 %}
+                                      <p>annuler
+                                      </p>
+                                      {% elseif location.validateProp == 1 %} 
+                                      <p>accepter
+                                      </p>                                      
+                                      {% endif %} 
 				</p>
 			</td></tr>
 			<tr><td align="center">
